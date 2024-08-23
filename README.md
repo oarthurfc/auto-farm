@@ -1,18 +1,20 @@
-# [Nome do projeto]
+# [AutoFarm]
 
-[Escreva um ou dois  parágrafo resumindo o objetivo do seu projeto.]
+[Construção de um projeto baseado em controle de uma fazenda em vários aspectos, entre financiero, funcionários, construção de documentos e vacinação do gado]
 
 ## Alunos integrantes da equipe
 
-* [Nome completo do aluno 1]
-* [Nome completo do aluno 2]
-* [Nome completo do aluno 3]
-* [Nome completo do aluno 4]
+* [Gabriel Ferreira Amaral]
+* [Pedro Lucas Sousa e Silva]
+* [Artuhur Ferreira Costa]
+* [Gabriel Pongelupe de Carvalho]
+* [André Fernadez Mendes]
+* [Felipe Freitas Campos Picinin]
 
 ## Professores responsáveis
 
-* [Nome completo do professor 1]
-* [Nome completo do professor 2]
+* [Soraia Lúcia da Silva]
+* [Lucila Ishitani]
 
 ## Instruções de utilização
 
