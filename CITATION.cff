@@ -1,31 +1,31 @@
 cff-version: 1.0.1
 message: Please cite this software using these metadata.
-title: 
+title: "AutoFarm"
 authors:
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names:
+  - family-names: "Mendes"
+    given-names: "André Fernandez"
+  - family-names: "Costa"
+    given-names: "Arthur Ferreira"
+  - family-names: "Picinin"
+    given-names: "Felipe Freitas Campos"
+  - family-names: "Amaral"
+    given-names: "Gabriel Ferreira"
+  - family-names: "Carvalho"
+    given-names: "Gabriel Pongelupe de"
+  - family-names: "Silva"
+    given-names: "Pedro Lucas Sousa e"
   - name-suffix: Professor
     affiliation: PUC Minas
-    family-names: 
-    given-names: 
+    family-names: "Ishitani"
+    given-names: "Lucila"
   - name-suffix: Professor
     affiliation: PUC Minas
-    family-names: 
-    given-names: 
+    family-names: "Silva"
+    given-names: "Soraia Lúcia da"
 keywords:
   - 
   - 
 repository-code: 
 license: CC-BY-4.0
 version: 1.0.0
-date-released: 2022-07-14
+date-released: 2024-09-04
