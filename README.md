@@ -1,6 +1,6 @@
 # AutoFarm
 
-Construção de um projeto baseado em controle de uma fazenda em vários aspectos, entre financiero, funcionários, construção de documentos e vacinação do gado
+O projeto AutoFarm consiste no desenvolvimento de uma plataforma web para automatizar e otimizar a gestão de operações de propriedades rurais que exercem a atividade de pecuária. O software tem por objetivo o controle detalhado do rebanho, abrangendo e as operações de compra e venda de animais, além do registro de nascimentos e mortes, a gestão das pastagens e o controle financeiro da propriedade rural.
 
 ## Alunos integrantes da equipe
 
