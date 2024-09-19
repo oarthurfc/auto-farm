@@ -17,4 +17,4 @@ const leialoSchema = new Schema({
     },
 })
 
-module.exports = mongoose.module('Leilao',leialoSchema)
+module.exports = mongoose.model('Leilao',leialoSchema)

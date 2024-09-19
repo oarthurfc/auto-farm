@@ -9,11 +9,11 @@ const animalSchema = new Schema({
     
     nome : {
         type : String,
-        required: True
+        required: true
     },
     sexo : {
         type : String,
-        enum : Object.values(Sexo),
+        enum : Object.values(sexo),
         required : true
 
     },

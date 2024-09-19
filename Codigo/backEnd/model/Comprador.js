@@ -12,7 +12,7 @@ const compradorSchema = new Schema({
     
     nome : {
         type : String,
-        required: True
+        required: true
     },
     email : {
         type : String,

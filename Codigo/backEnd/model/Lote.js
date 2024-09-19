@@ -9,4 +9,4 @@ const loteSchema = new Schema({
     },
 })
 
-module.exports = mongoose.module('Lote',loteSchema)
+module.exports = mongoose.model('Lote',loteSchema)

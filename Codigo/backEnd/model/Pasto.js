@@ -13,4 +13,4 @@ const pastoSchema = new Schema({
     },
 })
 
-module.exports = mongoose.module('Pasto',pastoSchema)
+module.exports = mongoose.model('Pasto',pastoSchema)

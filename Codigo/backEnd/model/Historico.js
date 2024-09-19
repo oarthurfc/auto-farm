@@ -28,4 +28,4 @@ const historicoSchema = new Schema({
 })
 
 
-module.exports = mongoose.module('Historico',historicoSchema)
+module.exports = mongoose.model('Historico',historicoSchema)

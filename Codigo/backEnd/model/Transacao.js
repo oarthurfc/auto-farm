@@ -28,4 +28,4 @@ const transacaoSchema = new Schema({
 
 Object.freeze(tipoTransacao)
 
-module.exports = mongoose.module('Transacao',transacaoSchema)
+module.exports = mongoose.model('Transacao',transacaoSchema)
