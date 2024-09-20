@@ -1,11 +1,25 @@
-import { useState } from 'react'
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import LoginPage from "./pages/login";
+import CadastroPage from "./pages/cadastro";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <LoginPage/>,
+  },
+  {
+    path: "/cadastro",
+    element: <CadastroPage/>,
+  },
+]);
 
 function App() {
   
   return (
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+    <RouterProvider router={router} />
   )
 }
 
