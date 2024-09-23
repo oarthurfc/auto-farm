@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaEye, FaTrashAlt, FaEdit } from "react-icons/fa"; // Importando ícones
+import { FaEye, FaTrashAlt, FaEdit, FaTimes  } from "react-icons/fa"; // Importando ícones
 
 const ListaAnimais = () => {
   const [animais, setAnimais] = useState([
@@ -62,10 +62,19 @@ const ListaAnimais = () => {
         </div>
       ))}
 
+
+
       {modalVisivel && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70">
-            <div className="bg-white p-10 rounded-lg shadow-lg text-center">
-                <h2 className="text-xl font-semibold mb-0"> Deseja excluir este animal? </h2>
+            <div className="bg-white p-10 rounded-lg shadow-lg text-center relative">
+                <button
+                    onClick={fecharModal}
+                    className="absolute top-3 right-3 text-2xl text-gray-500 hover:text-red-500 transition duration-300"
+                >
+                    <FaTimes />
+                </button>
+
+                <h2 className="text-xl font-semibold mb-0 mt-3"> Deseja excluir este animal? </h2>
                 <p className="text-gray-700 mb-8 text-base">
                     Você está prestes a deletar o animal de ID {animalParaExcluir?.id}.
                 </p>
