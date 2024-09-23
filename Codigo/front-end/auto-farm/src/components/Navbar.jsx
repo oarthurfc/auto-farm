@@ -9,7 +9,7 @@ const Navbar = () => {
         <div className='flex'>
         <img src="/favIcon.png" alt="Logo" className="h-16 mx-10 my-1" />
 
-        <ul className="flex space-x-20 items-center mx-28">
+        <ul className="flex space-x-20 items-center ">
           <li>
             <Link to="/" className="text-white text-lg hover:text-gray-300">Login</Link>
           </li>

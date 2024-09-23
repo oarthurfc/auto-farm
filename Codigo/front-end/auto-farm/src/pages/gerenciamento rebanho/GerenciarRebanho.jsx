@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import ListaAnimais from "./ListaAnimais";
+import ModalAddAnimal from "./ModalAddAnimal";
 
 
 const GerenciarRebanho = () => {
 
-    
+  const [adicionarAnimal, setAdicionarAnimal] = useState(false)  
 
   return (
     <div className='pt-10 bg-emerald-50 h-screen'>
@@ -20,7 +21,9 @@ const GerenciarRebanho = () => {
           Vender Animal
         </button>
         
-        <button className='bg-emerald-800 hover:bg-emerald-900 text-white font-bold py-3 px-20 rounded flex items-center'>
+        <button className='bg-emerald-800 hover:bg-emerald-900 text-white font-bold py-3 px-20 rounded flex items-center'
+          onClick={() => setAdicionarAnimal(true)}
+        >
             <FaPlus className="mr-2 border-2 rounded-full "/> 
             Adicionar Animal
         </button>
@@ -52,6 +55,13 @@ const GerenciarRebanho = () => {
       </div>
         
       
+      {adicionarAnimal && (
+        <div>
+          <ModalAddAnimal closeModal={setAdicionarAnimal}/>
+       </div>
+      )}
+      
+
     </div>
   )
 }
