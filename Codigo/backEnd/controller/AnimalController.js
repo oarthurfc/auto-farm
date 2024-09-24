@@ -31,10 +31,10 @@ const createNewAnimal = async (req, res) => {
         res.status(201).json(result);
         
     } catch (err) {
+        res.status(400).json({"message": "All statements required"})
         console.error(err);
     }                                                  
-    data.setAnimals([...data.animals, newEmployee]);
-    res.status(201).json(data.animals);
+    
 }
 
 const updateAnimal = async (req, res) => {                                                       
