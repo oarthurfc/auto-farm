@@ -1,11 +1,20 @@
 const Animal = require('../model/Animal');
 
 const getAllAnimals = async (req,res) => {
-    const animals = await Animal.find()
-    if(!animals){
-        return res.status(404).json('Nenhum animal encontrados')
-    }else
+    try{
+        const animals = await Animal.find()
+        .populate('pastoId')
+        .exec();
+    if (!animals || animals.length === 0) {
+        return res.status(404).json({ "message": "Nenhum animal encontrado." });
+    }
     return res.json(animals);
+    }
+    catch (err) {
+        console.error(err);
+        return res.status(500).json({ "message": "Erro ao buscar animais." });
+    
+}
 }
 
 
@@ -15,7 +24,8 @@ const createNewAnimal = async (req, res) => {
             nome : req.body.nome,
             sexo : req.body.sexo,
             nascimento : req.body.nascimento,
-            raca : req.body.raca
+            raca : req.body.raca,
+            pastoId: req.body.pastoId
 
         });
         res.status(201).json(result);
@@ -61,11 +71,19 @@ const getAnimalById = (req, res) => {
     if(!req?.params?.id){
         return res.status(400).json({'message': `ID paramater is required`})
     }
-    const animal =   Animal.findById(req.params.id).exec();                       
+   try{
+    const animal =   Animal.findById(req.params.id)
+    .populate('pastoId')
+    .exec();                       
     if (!animal) {
         return res.status(204).json({ "message": `No animal mathces ID ${req.params.id}.` });
     }
     res.json(animal);
+   }
+    catch(err){
+     console.error(err);
+     return res.status(500).json({ "message": "Erro ao buscar animal." });
+    }
 }
 
 module.exports = {
