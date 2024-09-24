@@ -9,6 +9,8 @@ const cors = require('cors');
 const { verifyJWT } = require('./middleware/verifyJWT');
 const cookieParser = require('cookie-parser');
 const { dbConnection } = require('./config/dbConnection');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 
 
 
@@ -27,6 +29,17 @@ app.use(express.json());
 //middleware fore cookies parser
 
 app.use(cookieParser());
+
+
+// Configuração do Swagger
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+// Rotas
+app.get("/termos", (request, response) => {
+    return response.json({
+        message: "Termos de Serviço",
+    });
+});
 
 
 
