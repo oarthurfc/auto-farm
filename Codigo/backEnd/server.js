@@ -46,7 +46,7 @@ app.get("/termos", (request, response) => {
 
 app.use('/auth',require('./route/AuthRoute'));
 app.use('/register',require('./route/RegisterRoute'));
-app.use(verifyJWT);
+//app.use(verifyJWT);
 app.use('/refresh',require('./route/RefreshRoute'));
 app.use('/logout',require('./route/LogoutRoute'));
 app.use('/animal',require('./route/AnimalRoute'));
