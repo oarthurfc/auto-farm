@@ -25,6 +25,11 @@ const animalSchema = new Schema({
     raca : {
         type : String,
         required : true
+    },
+    pastoId: {  
+        type: Schema.Types.ObjectId,  
+        ref: 'Pasto',  
+        required: false 
     }
 
 

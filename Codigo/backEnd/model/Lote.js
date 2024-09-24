@@ -7,6 +7,11 @@ const loteSchema = new Schema({
         type : Date,
         required : true
     },
+    animalId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Animal',
+        required: true
+    }
 })
 
 module.exports = mongoose.model('Lote',loteSchema)

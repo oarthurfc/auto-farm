@@ -2,11 +2,20 @@ const Historico = require('../model/Historico');
 
 // Função para buscar todos os históricos
 const getAllHistoricos = async (req, res) => {
-    const historicos = await Historico.find();
-    if (!historicos || historicos.length === 0) {
-        return res.status(404).json({ "message": "Nenhum histórico encontrado." });
+    try{
+        const historicos = await Historico.find()
+        .populate('animalId')
+        .exec();
+        if (!historicos || historicos.length === 0) {
+            return res.status(404).json({ "message": "Nenhum histórico encontrado." });
+        }
+        return res.json(historicos);
     }
-    return res.json(historicos);
+    catch (err) {
+        console.error(err);
+        return res.status(500).json({ "message": "Erro ao buscar históricos." });
+    }
+   
 };
 
 // Função para criar um novo histórico
@@ -17,7 +26,8 @@ const createNewHistorico = async (req, res) => {
             peso: req.body.peso,
             tratamento: req.body.tratamento,
             local: req.body.local,
-            tamanho: req.body.tamanho
+            tamanho: req.body.tamanho,
+            animalId: req.body.animalId
         });
         return res.status(201).json(result);
     } catch (err) {
@@ -65,12 +75,20 @@ const getHistoricoById = async (req, res) => {
         return res.status(400).json({ "message": "ID é necessário." });
     }
 
-    const historico = await Historico.findById(req.params.id).exec();
+    try{
+        const historico = await Historico.findById(req.params.id)
+        .populate('animalId')
+        .exec();
     if (!historico) {
         return res.status(204).json({ "message": `Nenhum histórico encontrado com o ID ${req.params.id}.` });
     }
 
     return res.json(historico);
+    }
+    catch (err) {
+        console.error(err);
+        return res.status(500).json({ "message": "Erro ao buscar histórico." });
+    }
 };
 
 module.exports = {

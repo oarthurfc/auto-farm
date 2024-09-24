@@ -3,7 +3,10 @@ const Transacao = require('../model/Transacao');
 // Função para buscar todas as transações
 const getAllTransacoes = async (req, res) => {
     try {
-        const transacoes = await Transacao.find();
+        const transacoes = await Transacao.find()
+        .populate('loteId')
+        .populate('leilaoId')
+        .exec();
         if (!transacoes || transacoes.length === 0) {
             return res.status(404).json({ "message": "Nenhuma transação encontrada." });
         }
@@ -20,7 +23,9 @@ const createNewTransacao = async (req, res) => {
         const result = await Transacao.create({
             tipoTransacao: req.body.tipoTransacao,
             data: req.body.data,
-            preco: req.body.preco
+            preco: req.body.preco,
+            loteId: req.body.loteId,
+            leilaoId: req.body.leilaoId
         });
         return res.status(201).json(result);
     } catch (err) {
@@ -77,7 +82,10 @@ const getTransacaoById = async (req, res) => {
             return res.status(400).json({ "message": "ID é necessário." });
         }
 
-        const transacao = await Transacao.findById(req.params.id).exec();
+        const transacao = await Transacao.findById(req.params.id)
+            .populate('loteId')
+            .populate('leilaoId')
+            .exec();
         if (!transacao) {
             return res.status(204).json({ "message": `Nenhuma transação encontrada com o ID ${req.params.id}.` });
         }

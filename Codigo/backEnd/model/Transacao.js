@@ -22,6 +22,17 @@ const transacaoSchema = new Schema({
         type : Number,
         required : true
     },
+    loteId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Lote',
+        required: true
+        
+    },
+    leilaoId:{
+        type: Schema.Types.ObjectId,
+        ref: 'Leilao',
+        required: true
+    }
 
 })
 

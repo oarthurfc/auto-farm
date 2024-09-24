@@ -44,6 +44,10 @@ app.use('/historico',require('./route/HistoricoRoute'));
 app.use('/lote',require('./route/LoteRoute'));
 app.use('/tarefa',require('./route/TarefaRoute'));
 app.use('/transacao',require('./route/TransacaoRoute'));
+app.use('/despesa',require('./route/DespesaRoute'));
+app.use('/tarefaFuncionario',require('./route/TarefaFuncionarioRoute'));
+app.use('/pasto',require('./route/PastoRoute'));
+
  
 
 

@@ -2,18 +2,27 @@ const Lote = require('../model/Lote');
 
 // Função para buscar todos os lotes
 const getAllLotes = async (req, res) => {
-    const lotes = await Lote.find();
+    try{
+        const lotes = await Lote.find()
+        .populate('animalId')
+        .exec();
     if (!lotes || lotes.length === 0) {
         return res.status(404).json({ "message": "Nenhum lote encontrado." });
     }
     return res.json(lotes);
-};
+    }
+    catch (err) {
+        console.error(err);
+        return res.status(500).json({ "message": "Erro ao buscar lotes." });
+    
+}};
 
 // Função para criar um novo lote
 const createNewLote = async (req, res) => {
     try {
         const result = await Lote.create({
-            data: req.body.data
+            data: req.body.data,
+            animalId: req.body.animalId
         });
         return res.status(201).json(result);
     } catch (err) {
@@ -57,12 +66,20 @@ const getLoteById = async (req, res) => {
         return res.status(400).json({ "message": "ID é necessário." });
     }
 
-    const lote = await Lote.findById(req.params.id).exec();
-    if (!lote) {
-        return res.status(204).json({ "message": `Nenhum lote encontrado com o ID ${req.params.id}.` });
+    try{
+        const lote = await Lote.findById(req.params.id)
+        .populate('animalId')
+        .exec();
+        if (!lote) {
+            return res.status(204).json({ "message": `Nenhum lote encontrado com o ID ${req.params.id}.` });
+        }
+    
+        return res.json(lote);
     }
-
-    return res.json(lote);
+    catch (err) {
+        console.error(err);
+        return res.status(500).json({ "message": "Erro ao buscar lote." });
+    }
 };
 
 module.exports = {

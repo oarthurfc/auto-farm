@@ -22,6 +22,13 @@ const historicoSchema = new Schema({
         type : Number,
         required : true
     },
+    animalId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Animal',
+        required: true
+
+
+    }
     
 
     
