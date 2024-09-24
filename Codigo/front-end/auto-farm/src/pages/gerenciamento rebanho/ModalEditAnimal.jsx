@@ -10,7 +10,7 @@ const ModalEditAnimal = ({closeModal}) => {
 
   return (
     <div className="fixed inset-0 flex items-start justify-center bg-black bg-opacity-70">
-        <div className="flex overflow-y-auto max-h-[100vh] text-base scale-90 flex-col gap-6 bg-white p-10 rounded-lg shadow-lg text-center relative mr-5">
+        <div className="flex overflow-y-auto max-h-[100vh] text-base scale-90 lg:scale-105 lg:mt-20 flex-col gap-6 bg-white p-10 rounded-lg shadow-lg text-center relative mr-5">
             <BtnClose fecharModal={handleCloseModal} />
             <h1 className="text-emerald-950 text-2xl font-bold">Editar Animal</h1>
             <InputField 

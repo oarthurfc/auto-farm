@@ -2,7 +2,7 @@ import { useState } from "react";
 import BtnClose from "../../components/BtnClose";
 import InputField from "../../components/InputField";
 import { FaTimes } from "react-icons/fa";
-import { create } from "../../services/AnimalService";
+import { create, getAll } from "../../services/AnimalService";
 
 const ModalAddAnimal = ({closeModal}) => {
 
@@ -26,13 +26,20 @@ const ModalAddAnimal = ({closeModal}) => {
             nascimento: animalNascimento
         }
 
-        try {
-            create(newAnimal).then(handleCloseModal)
-            alert(newAnimal + "criado")
-          } catch (error) {
+       
+        create(newAnimal)
+        .then(() => {
+            handleCloseModal(); // Fecha o modal após o sucesso
+            alert(`${newAnimal.nome} foi criado`); // Mensagem de sucesso
+            window.location.reload();
+        })
+        .catch((error) => {
             console.error("Erro ao cadastrar animal:", error);
-            alert('você deve preencher todos os campos')
-          }
+            alert('Você deve preencher todos os campos!'); // Mensagem de erro
+        });
+
+        
+          
     }
 
     
@@ -57,10 +64,16 @@ const ModalAddAnimal = ({closeModal}) => {
             <div className="flex gap-5">
                 <div className="flex flex-col gap-1">
                     <span className="text-emerald-800 font-semibold">Sexo</span>
-                    <input type="text" placeholder="femea"className="h-12 border border-[#E3E3E3] rounded-[4px] p-4 font-normal placeholder-[#90A0B7] text-sm text-emerald-950"
-                        value={animalSexo} onChange={(e) => setAnimalSexo(e.target.value)}
-                    />
-                </div>
+                    <select 
+                        className="h-12 border border-[#E3E3E3] rounded-[4px] p-4 font-normal text-sm  text-emerald-950 "
+                        value={animalSexo} 
+                        onChange={(e) => setAnimalSexo(e.target.value)}
+                    >
+                        <option value="" disabled>Selecione o sexo</option> 
+                        <option value="femea" className="text-black  text-sm">femea</option>
+                        <option value="macho" className="text-black  text-sm">macho</option>
+                    </select>
+                    </div>
                 <div className="flex flex-col gap-1">
                     <span className="text-emerald-800 font-semibold">Raça</span>
                     <input type="text" placeholder="Brangus"className="h-12 border border-[#E3E3E3] rounded-[4px] p-4 font-normal placeholder-[#90A0B7] text-sm text-emerald-950"

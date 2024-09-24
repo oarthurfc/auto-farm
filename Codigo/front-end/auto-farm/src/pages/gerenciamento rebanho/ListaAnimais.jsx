@@ -8,17 +8,20 @@ import { getAll, deletar } from "../../services/AnimalService";
 
 const ListaAnimais = () => {
   const [animais, setAnimais] = useState([])
+  
 
   useEffect(() => {
     getAll().then((res) => {setAnimais(res.data)})
       .then(console.log(animais))
-  },[])
+  },[setAnimais])
 
-
+  
   const [editarAnimalModal, setEditarAnimalModal] = useState(false);
 
   const [animalParaExcluir, setAnimalParaExcluir] = useState(null) 
   const [modalVisivel, setModalVisivel] = useState(false)
+
+  
 
   const removerAnimal = (id) => {
     deletar(id)
@@ -53,7 +56,7 @@ const ListaAnimais = () => {
         >
           {/* ID e Raça */}
           <div className="text-start">
-            <p className=" text-emerald-800">{a.sexo}</p>
+            <p className=" text-emerald-800">{`${a.sexo}`}</p>
             <p className="text-gray-500 text-lg">{a.raca}</p>
           </div>
 
