@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FaEye, FaTrashAlt, FaEdit, FaTimes  } from "react-icons/fa"; // Importando ícones
+import { FaEye, FaTrashAlt, FaEdit  } from "react-icons/fa"; // Importando ícones
 import BtnClose from "../../components/BtnClose";
 import ModalEditAnimal from "./ModalEditAnimal";
 import { getAll, deletar } from "../../services/AnimalService";
@@ -13,7 +13,7 @@ const ListaAnimais = () => {
   useEffect(() => {
     getAll().then((res) => {setAnimais(res.data)})
       .then(console.log(animais))
-  },[setAnimais])
+  },[animais])
 
   
   const [editarAnimalModal, setEditarAnimalModal] = useState(false);
@@ -26,13 +26,14 @@ const ListaAnimais = () => {
   const removerAnimal = (id) => {
     deletar(id)
       .then(() => {
-        // Atualiza o estado removendo o animal da lista após a exclusão
+       
         const novaListaAnimais = animais.filter((animal) => animal.id !== id); 
         setAnimais(novaListaAnimais);
-        fecharModal(); // Fecha o modal após deletar
+        fecharModal(); 
       })
       .catch((error) => {
         console.error("Erro ao deletar o animal:", error);
+        alert('Erro ao deletar o animal: de id ' + id)
       });
     fecharModal()
   };
