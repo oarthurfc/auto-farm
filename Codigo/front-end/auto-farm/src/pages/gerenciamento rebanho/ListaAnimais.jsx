@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { FaEye, FaTrashAlt, FaEdit, FaTimes  } from "react-icons/fa"; // Importando ícones
 import BtnClose from "../../components/BtnClose";
+import ModalEditAnimal from "./ModalEditAnimal";
+
 
 const ListaAnimais = () => {
   const [animais, setAnimais] = useState([
@@ -9,6 +11,9 @@ const ListaAnimais = () => {
     { id: 11, raca: "vaca", }, { id: 12, raca: "vaca", },
     
   ])
+
+
+  const [editarAnimalModal, setEditarAnimalModal] = useState(false);
 
   const [animalParaExcluir, setAnimalParaExcluir] = useState(null) 
   const [modalVisivel, setModalVisivel] = useState(false)
@@ -31,7 +36,7 @@ const ListaAnimais = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-16 text-2xl">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-16 pb-10 text-2xl">
       {animais.map((a) => (
         <div
           key={a.id}
@@ -45,16 +50,20 @@ const ListaAnimais = () => {
 
           {/* Ícones - MUDAR CONFORME SOLICITADO*/}
           <div className="flex space-x-5 text-3xl ">
-            <FaEye className="text-emerald-800 cursor-pointer hover:text-emerald-600 transition duration-300" />
-            <FaTrashAlt className="text-emerald-800 cursor-pointer hover:text-red-500 transition duration-300" 
+            <FaEye className="text-emerald-800 cursor-pointer hover:text-emerald-600 transition duration-300" title="Visualizar" />
+            <FaTrashAlt className="text-emerald-800 cursor-pointer hover:text-red-500 transition duration-300" title="Deletar" 
                 onClick={() => abrirModal(a)}
             />
-            <FaEdit className="text-emerald-800 cursor-pointer hover:text-emerald-600 transition duration-300" />
+            <FaEdit className="text-emerald-800 cursor-pointer hover:text-emerald-600 transition duration-300" title="Editar"
+              onClick={() => setEditarAnimalModal(true)} />
           </div>
         </div>
       ))}
 
 
+      {editarAnimalModal && (
+        <ModalEditAnimal closeModal={setEditarAnimalModal}/>
+      )}
 
       {modalVisivel && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70">
