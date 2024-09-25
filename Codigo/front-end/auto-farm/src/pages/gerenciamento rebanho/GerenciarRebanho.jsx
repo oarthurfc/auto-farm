@@ -2,10 +2,36 @@ import { useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import ListaAnimais from "./ListaAnimais";
 import ModalAddAnimal from "./ModalAddAnimal";
+import ModalEditAnimal from "./ModalEditAnimal";
+import { update } from "../../services/AnimalService";
 
 const GerenciarRebanho = () => {
   const [adicionarAnimal, setAdicionarAnimal] = useState(false);
 
+  const[animalSelecionado, setAnimalSelecionado] = useState(null)
+ 
+  const [editarAnimalModal, setEditarAnimalModal] = useState(false);
+
+  const handleModalEdit = async (updatedData) => {
+    if (animalSelecionado) {
+      update(animalSelecionado._id, updatedData)
+      .then(() => {
+        
+        alert('novo animal editado')
+        setAnimalSelecionado(null);
+        setEditarAnimalModal(false)
+      })
+      .catch((error) => {
+        console.error("Erro ao deletar o animal:", error);
+        alert("Erro ao editar o animal");
+      });
+    fecharModal();
+    }
+    else{
+      alert('Erro ao tentar editar animal')
+      setEditarAnimalModal(false);
+    }
+  };
 
   return (
     <div className="pt-10 bg-emerald-50 min-h-screen">
@@ -56,16 +82,19 @@ const GerenciarRebanho = () => {
       </div>
 
       <div className="w-full sm:w-7/12 mx-auto text-center">
-        <ListaAnimais />
+        <ListaAnimais setEditarAnimalModal={setEditarAnimalModal} setAnimalSelecionado={setAnimalSelecionado}/>
       </div>
 
       {adicionarAnimal && (
         <ModalAddAnimal closeModal={setAdicionarAnimal} />
       )}
 
-      
-
-
+      {editarAnimalModal && (
+        <ModalEditAnimal closeModal={setEditarAnimalModal} 
+        animalSelecionado={animalSelecionado} // Passar animalSelecionado
+        onEdit={handleModalEdit} // Passar a função de edição 
+        />
+      )}
     </div>
   );
 };
