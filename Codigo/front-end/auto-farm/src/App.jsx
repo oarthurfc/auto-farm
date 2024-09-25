@@ -3,11 +3,14 @@ import {
   RouterProvider,
   Outlet,
 } from "react-router-dom";
-
+// PAGINAS
 import LoginPage from "./pages/login";
 import CadastroPage from "./pages/cadastro";
 import GerenciarRebanho from "./pages/gerenciar-rebanho";
-import Navbar from "./components/Navbar"; // Importa o componente Navbar
+import AnimalDetalhes from './pages/AnimalDetalhes/AnimalDetalhes';
+
+import Navbar from "./components/Navbar"; 
+
 
 const Layout = () => {
   return (
@@ -36,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: "/gerenciar-rebanho",
         element: <GerenciarRebanho />,
+      },
+      {
+        path: "/animal/:id",
+        element: <AnimalDetalhes />,
       },
     ],
   },
