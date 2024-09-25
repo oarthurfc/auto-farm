@@ -7,6 +7,7 @@ function CadastroPage() {
   useEffect(() => {
     document.title = "Cadastro - AutoFarm"
   });
+
   
   return (
     <div className="min-h-screen py-12 flex items-center justify-center bg-emerald-50">

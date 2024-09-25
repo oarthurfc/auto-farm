@@ -8,7 +8,8 @@ const GerenciarRebanho = () => {
 
 
   return (
-    <div className="pt-10 bg-emerald-50 min-h-screen">
+    <div className="pt-10 bg-emerald-50 min-h-screen max-w">
+
       <h1 className="text-4xl sm:text-5xl text-center font-semibold text-emerald-800 mb-5">
         Gerenciar Rebanho
       </h1>
@@ -62,9 +63,6 @@ const GerenciarRebanho = () => {
       {adicionarAnimal && (
         <ModalAddAnimal closeModal={setAdicionarAnimal} />
       )}
-
-      
-
 
     </div>
   );

@@ -3,9 +3,10 @@ import {
   RouterProvider,
   Outlet,
 } from "react-router-dom";
+
 import LoginPage from "./pages/login";
 import CadastroPage from "./pages/cadastro";
-import GerenciarRebanho from "./pages/gerenciamento rebanho/GerenciarRebanho";
+import GerenciarRebanho from "./pages/gerenciar-rebanho";
 import Navbar from "./components/Navbar"; // Importa o componente Navbar
 
 const Layout = () => {
@@ -25,7 +26,7 @@ const router = createBrowserRouter([
     element: <Layout />, 
     children: [
       {
-        path: "/",
+        path: "/login",
         element: <LoginPage />,
       },
       {
@@ -33,7 +34,7 @@ const router = createBrowserRouter([
         element: <CadastroPage />,
       },
       {
-        path: "/rebanho",
+        path: "/gerenciar-rebanho",
         element: <GerenciarRebanho />,
       },
     ],
