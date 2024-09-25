@@ -36,6 +36,9 @@
     "/api/admin": {
       "get": {
         "summary": "Endpoint para administradores",
+        "tags": [
+          "Admin"
+        ],
         "security": [
           {
             "BearerAuth": []
@@ -237,9 +240,6 @@
         ],
         "responses": {
           "204": {
-            "description": "Animal deletado com sucesso."
-          },
-          "204": {
             "description": "Nenhum animal encontrado com o ID especificado."
           }
         }
@@ -250,7 +250,7 @@
         "summary": "Login de usuário",
         "description": "Autentica um usuário e retorna um token de acesso.",
         "tags": [
-          "Animal"
+          "Login"
         ],
         "security": [
           {
@@ -640,6 +640,14 @@
       "delete": {
         "summary": "Deletar endereço",
         "description": "Remove um endereço da base de dados.",
+        "tags": [
+          "Endereço"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "parameters": [
           {
             "name": "id",
@@ -654,9 +662,6 @@
         "responses": {
           "204": {
             "description": "Endereço deletado com sucesso."
-          },
-          "204": {
-            "description": "Nenhum endereço encontrado com o ID especificado."
           }
         }
       }
@@ -695,6 +700,14 @@
       "post": {
         "summary": "Criar um novo funcionário",
         "description": "Cria um novo registro de funcionário.",
+        "tags": [
+          "Funcionário"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -831,13 +844,9 @@
             }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "Funcionário deletado com sucesso."
-          },
-          "204": {
-            "description": "Nenhum funcionário encontrado com o ID especificado."
-          }
+        "responses": {},
+        "204": {
+          "description": "Nenhum funcionário encontrado com o ID especificado."
         }
       }
     },
@@ -845,6 +854,14 @@
       "post": {
         "summary": "Criar um novo histórico",
         "description": "Cria um novo registro de histórico de tratamento para um animal.",
+        "tags": [
+          "Histórico"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "parameters": [
           {
             "in": "body",
@@ -868,6 +885,14 @@
       "get": {
         "summary": "Listar todos os históricos",
         "description": "Recupera uma lista de todos os históricos de tratamentos.",
+        "tags": [
+          "Histórico"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Lista de históricos.",
@@ -891,6 +916,14 @@
       "get": {
         "summary": "Obter histórico por ID",
         "description": "Recupera um histórico específico usando o ID fornecido.",
+        "tags": [
+          "Histórico"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "parameters": [
           {
             "name": "id",
@@ -918,6 +951,14 @@
       "put": {
         "summary": "Atualizar histórico por ID",
         "description": "Atualiza os dados de um histórico existente usando o ID fornecido.",
+        "tags": [
+          "Histórico"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "parameters": [
           {
             "name": "id",
@@ -951,6 +992,14 @@
       "delete": {
         "summary": "Deletar histórico por ID",
         "description": "Remove um histórico específico usando o ID fornecido.",
+        "tags": [
+          "Histórico"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "parameters": [
           {
             "name": "id",
@@ -977,6 +1026,14 @@
       "post": {
         "summary": "Criar um novo leilão",
         "description": "Cria um novo registro de leilão.",
+        "tags": [
+          "Leilão"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "parameters": [
           {
             "in": "body",
@@ -1000,6 +1057,14 @@
       "get": {
         "summary": "Listar todos os leilões",
         "description": "Recupera uma lista de todos os leilões.",
+        "tags": [
+          "Leilão"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Lista de leilões.",
@@ -1023,6 +1088,14 @@
       "get": {
         "summary": "Obter leilão por ID",
         "description": "Recupera um leilão específico usando o ID fornecido.",
+        "tags": [
+          "Leilão"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1050,6 +1123,14 @@
       "put": {
         "summary": "Atualizar leilão por ID",
         "description": "Atualiza os dados de um leilão existente usando o ID fornecido.",
+        "tags": [
+          "Leilão"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1083,6 +1164,14 @@
       "delete": {
         "summary": "Deletar leilão por ID",
         "description": "Remove um leilão específico usando o ID fornecido.",
+        "tags": [
+          "Leilão"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1109,6 +1198,14 @@
       "get": {
         "summary": "Logout do usuário",
         "description": "Realiza o logout de um usuário removendo o token de atualização armazenado.",
+        "tags": [
+          "Logout"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "responses": {
           "204": {
             "description": "Logout realizado com sucesso, sem conteúdo retornado."
@@ -1116,10 +1213,709 @@
           "403": {
             "description": "Token de atualização não encontrado ou inválido."
           }
-        },
+        }
+      }
+    },
+    "/lote": {
+      "post": {
+        "summary": "Criar um novo lote",
+        "description": "Cria um novo registro de lote.",
         "tags": [
-          "Auth"
-        ]
+          "Lote"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Dados para criar um novo lote.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Lote"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Lote criado com sucesso."
+          },
+          "500": {
+            "description": "Erro ao criar lote."
+          }
+        }
+      },
+      "get": {
+        "summary": "Listar todos os lotes",
+        "description": "Recupera uma lista de todos os lotes.",
+        "tags": [
+          "Lote"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de lotes.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Lote"
+              }
+            }
+          },
+          "404": {
+            "description": "Nenhum lote encontrado."
+          },
+          "500": {
+            "description": "Erro ao buscar lotes."
+          }
+        }
+      }
+    },
+    "/lote/{id}": {
+      "get": {
+        "summary": "Obter lote por ID",
+        "description": "Recupera um lote específico usando o ID fornecido.",
+        "tags": [
+          "Lote"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID do lote."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalhes do lote.",
+            "schema": {
+              "$ref": "#/definitions/Lote"
+            }
+          },
+          "404": {
+            "description": "Lote não encontrado."
+          },
+          "500": {
+            "description": "Erro ao buscar lote."
+          }
+        }
+      },
+      "put": {
+        "summary": "Atualizar lote por ID",
+        "description": "Atualiza os dados de um lote existente usando o ID fornecido.",
+        "tags": [
+          "Lote"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID do lote."
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Dados para atualizar o lote.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Lote"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lote atualizado com sucesso."
+          },
+          "404": {
+            "description": "Lote não encontrado."
+          },
+          "500": {
+            "description": "Erro ao atualizar lote."
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletar lote por ID",
+        "description": "Remove um lote específico usando o ID fornecido.",
+        "tags": [
+          "Lote"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID do lote."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lote deletado com sucesso."
+          },
+          "404": {
+            "description": "Lote não encontrado."
+          },
+          "500": {
+            "description": "Erro ao deletar lote."
+          }
+        }
+      }
+    },
+    "/pasto": {
+      "get": {
+        "summary": "Listar todos os pastos",
+        "description": "Recupera uma lista de todos os pastos.",
+        "tags": [
+          "Pasto"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de pastos.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Pasto"
+              }
+            }
+          },
+          "404": {
+            "description": "Nenhum pasto encontrado."
+          },
+          "500": {
+            "description": "Erro ao buscar pastos."
+          }
+        }
+      },
+      "post": {
+        "summary": "Criar um novo pasto",
+        "description": "Cria um novo registro de pasto.",
+        "tags": [
+          "Pasto"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Dados para criar um novo pasto.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Pasto"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Pasto criado com sucesso."
+          },
+          "500": {
+            "description": "Erro ao criar pasto."
+          }
+        }
+      }
+    },
+    "/pasto/{id}": {
+      "get": {
+        "summary": "Obter pasto por ID",
+        "description": "Recupera um pasto específico usando o ID fornecido.",
+        "tags": [
+          "Pasto"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID do pasto."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalhes do pasto.",
+            "schema": {
+              "$ref": "#/definitions/Pasto"
+            }
+          },
+          "404": {
+            "description": "Pasto não encontrado."
+          },
+          "500": {
+            "description": "Erro ao buscar pasto."
+          }
+        }
+      },
+      "put": {
+        "summary": "Atualizar pasto por ID",
+        "description": "Atualiza os dados de um pasto existente usando o ID fornecido.",
+        "tags": [
+          "Pasto"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID do pasto."
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Dados para atualizar o pasto.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Pasto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pasto atualizado com sucesso."
+          },
+          "404": {
+            "description": "Pasto não encontrado."
+          },
+          "500": {
+            "description": "Erro ao atualizar pasto."
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletar pasto por ID",
+        "description": "Remove um pasto específico usando o ID fornecido.",
+        "tags": [
+          "Pasto"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID do pasto."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pasto deletado com sucesso."
+          },
+          "404": {
+            "description": "Pasto não encontrado."
+          },
+          "500": {
+            "description": "Erro ao deletar pasto."
+          }
+        }
+      }
+    },
+    "/refresh-token": {
+      "get": {
+        "summary": "Obter um novo Access Token",
+        "description": "Gera um novo access token usando o refresh token armazenado nos cookies.",
+        "tags": [
+          "Refresh-token"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Novo access token gerado.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "accessToken": {
+                  "type": "string",
+                  "description": "Novo access token."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Refresh token não encontrado nos cookies."
+          },
+          "403": {
+            "description": "Refresh token inválido ou usuário não encontrado."
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "summary": "Cria um novo usuário",
+        "description": "Cria um novo usuário no sistema",
+        "tags": [
+          "Users"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "username": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "email",
+                  "password"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Usuário criado com sucesso"
+          },
+          "400": {
+            "description": "Falha na validação dos dados"
+          }
+        }
+      }
+    },
+    "/tarefas": {
+      "get": {
+        "summary": "Obtém todas as tarefas",
+        "tags": [
+          "Tarefas"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Uma lista de todas as tarefas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Tarefa"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Nenhuma tarefa encontrada"
+          }
+        }
+      },
+      "post": {
+        "summary": "Cria uma nova tarefa",
+        "tags": [
+          "Tarefas"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "nome": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "data",
+                  "nome"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Tarefa criada com sucesso"
+          },
+          "500": {
+            "description": "Erro ao criar a tarefa"
+          }
+        }
+      }
+    },
+    "/tarefas/{id}": {
+      "get": {
+        "summary": "Obtém uma tarefa por ID",
+        "tags": [
+          "Tarefas"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tarefa encontrada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tarefa"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Tarefa não encontrada"
+          }
+        }
+      },
+      "put": {
+        "summary": "Atualiza uma tarefa por ID",
+        "tags": [
+          "Tarefas"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "nome": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Tarefa atualizada com sucesso"
+          },
+          "404": {
+            "description": "Tarefa não encontrada"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deleta uma tarefa por ID",
+        "tags": [
+          "Tarefas"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tarefa deletada com sucesso"
+          },
+          "404": {
+            "description": "Tarefa não encontrada"
+          }
+        }
+      }
+    },
+    "/transacoes": {
+      "get": {
+        "summary": "Obtém todas as transações",
+        "tags": [
+          "Transações"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Uma lista de todas as transações",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Transacao"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Nenhuma transação encontrada"
+          }
+        }
+      },
+      "post": {
+        "summary": "Cria uma nova transação",
+        "tags": [
+          "Transações"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tipoTransacao": {
+                    "type": "string",
+                    "enum": [
+                      "venda",
+                      "compra"
+                    ]
+                  },
+                  "data": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "preco": {
+                    "type": "number"
+                  },
+                  "loteId": {
+                    "type": "string"
+                  },
+                  "leilaoId": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "tipoTransacao",
+                  "data",
+                  "preco",
+                  "loteId",
+                  "leilaoId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Transação criada com sucesso"
+          },
+          "500": {
+            "description": "Erro ao criar a transação"
+          }
+        }
       }
     }
   },
@@ -1129,6 +1925,13 @@
         "type": "http",
         "scheme": "bearer",
         "bearerFormat": "JWT"
+      }
+    },
+    "securityDefinitions": {
+      "cookieAuth": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "jwt"
       }
     },
     "security": [
@@ -1364,13 +2167,91 @@
             "type": "string",
             "example": "johndoe"
           },
-          "password": {
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string",
+              "example": "strongpassword123"
+            },
+            "refreshToken": {
+              "type": "string",
+              "description": "Token de atualização para revalidar sessões."
+            }
+          }
+        }
+      },
+      "Lote": {
+        "type": "object",
+        "required": [
+          "data",
+          "animalId"
+        ],
+        "properties": {
+          "data": {
             "type": "string",
-            "example": "strongpassword123"
+            "format": "date",
+            "example": "2024-09-24"
           },
-          "refreshToken": {
+          "animalId": {
             "type": "string",
-            "description": "Token de atualização para revalidar sessões."
+            "example": "65034dcf2b1e0b0020db445a"
+          }
+        }
+      },
+      "Pasto": {
+        "type": "object",
+        "required": [
+          "nome",
+          "tamanho"
+        ],
+        "properties": {
+          "nome": {
+            "type": "string",
+            "example": "Pasto Norte"
+          },
+          "tamanho": {
+            "type": "number",
+            "example": 200.5
+          }
+        }
+      },
+      "Tarefa": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "string",
+            "format": "date"
+          },
+          "nome": {
+            "type": "string"
+          }
+        }
+      },
+      "Transacao": {
+        "type": "object",
+        "properties": {
+          "tipoTransacao": {
+            "type": "string",
+            "enum": [
+              "venda",
+              "compra"
+            ]
+          },
+          "data": {
+            "type": "string",
+            "format": "date"
+          },
+          "preco": {
+            "type": "number"
+          },
+          "loteId": {
+            "type": "string"
+          },
+          "leilaoId": {
+            "type": "string"
           }
         }
       }
