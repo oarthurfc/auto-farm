@@ -1,8 +1,6 @@
 import { useState } from "react";
 import BtnClose from "../../components/BtnClose";
-import InputField from "../../components/InputField";
-import { FaTimes } from "react-icons/fa";
-import { create, getAll } from "../../services/AnimalService";
+import { create } from "../../services/AnimalService";
 
 const ModalAddAnimal = ({closeModal}) => {
 

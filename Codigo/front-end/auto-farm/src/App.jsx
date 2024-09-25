@@ -7,7 +7,7 @@ import {
 import LoginPage from "./pages/login";
 import CadastroPage from "./pages/cadastro";
 import GerenciarRebanho from "./pages/gerenciar-rebanho";
-import AnimalDetalhes from './pages/AnimalDetalhes/AnimalDetalhes';
+import AnimalDetalhes from './pages/AnimalDetalhes/index';
 
 import Navbar from "./components/Navbar"; 
 

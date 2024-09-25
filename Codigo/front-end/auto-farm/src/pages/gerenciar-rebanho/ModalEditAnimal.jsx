@@ -34,6 +34,7 @@ const ModalEditAnimal = ({ closeModal, animalSelecionado, onEdit }) => {
   const handleConfirm = (e) => {
     e.preventDefault();
     const newAnimal = {
+        _id: animalSelecionado._id,
         nome: animalName,
         sexo: animalSexo,
         raca: animalRaca,
