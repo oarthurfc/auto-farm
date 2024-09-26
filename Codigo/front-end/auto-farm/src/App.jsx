@@ -7,7 +7,7 @@ import {
 import LoginPage from "./pages/login";
 import CadastroPage from "./pages/cadastro";
 import GerenciarRebanho from "./pages/gerenciar-rebanho";
-import AnimalDetalhes from './pages/AnimalDetalhes/index';
+import AnimalDetalhes from './pages/detalhes-animal/index';
 
 import Navbar from "./components/Navbar"; 
 
@@ -41,7 +41,7 @@ const router = createBrowserRouter([
         element: <GerenciarRebanho />,
       },
       {
-        path: "/animal/:id",
+        path: "/detalhes-animal/:id",
         element: <AnimalDetalhes />,
       },
     ],

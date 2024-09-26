@@ -19,7 +19,7 @@ const ListaAnimais = () => {
   }, []);
 
   const visualizarAnimal = (id) => {
-    navigate(`/animal/${id}`);
+    navigate(`/detalhes-animal/${id}`);
   };
 
   const abrirModalEditar = (animal) => {
