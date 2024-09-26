@@ -10,7 +10,7 @@ import GerenciarRebanho from "./pages/gerenciar-rebanho";
 import AnimalDetalhes from './pages/detalhes-animal/index';
 
 import Navbar from "./components/Navbar"; 
-
+import ProtectedRoute from "./components/ProtectedRoute"; // Importa o componente de proteção
 
 const Layout = () => {
   return (
@@ -29,23 +29,35 @@ const router = createBrowserRouter([
     element: <Layout />, 
     children: [
       {
-        path: "/login",
-        element: <LoginPage />,
-      },
-      {
         path: "/cadastro",
-        element: <CadastroPage />,
+        element: (
+          <ProtectedRoute>
+            <CadastroPage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/gerenciar-rebanho",
-        element: <GerenciarRebanho />,
+        element: (
+          <ProtectedRoute>
+            <GerenciarRebanho />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/detalhes-animal/:id",
-        element: <AnimalDetalhes />,
+        element: (
+          <ProtectedRoute>
+            <AnimalDetalhes />
+          </ProtectedRoute>
+        ),
       },
     ],
   },
+  { 
+    path: "/login",
+    element: <LoginPage />
+  }
 ]);
 
 function App() {

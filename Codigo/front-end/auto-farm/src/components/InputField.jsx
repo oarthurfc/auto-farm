@@ -1,4 +1,4 @@
-const InputField = ({label, placeholder, type, value, onChange}) => {
+const InputField = ({label, placeholder, type, value, onChange, required}) => {
 
     return (
         <div className="flex flex-col gap-1">
@@ -8,6 +8,7 @@ const InputField = ({label, placeholder, type, value, onChange}) => {
                     placeholder={placeholder} 
                     value={value}
                     onChange={onChange}
+                    required={required}
                     className="h-12 border border-[#E3E3E3] rounded-[4px] p-4 font-normal placeholder-[#90A0B7] text-sm text-emerald-950"/>
         </div>
     )
