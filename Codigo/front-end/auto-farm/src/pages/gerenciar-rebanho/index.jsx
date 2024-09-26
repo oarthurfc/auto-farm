@@ -5,7 +5,7 @@ import ModalAddAnimal from "./ModalAddAnimal";
 
 const GerenciarRebanho = () => {
   const [adicionarAnimal, setAdicionarAnimal] = useState(false);
-
+  
 
   return (
     <div className="pt-10 bg-emerald-50 min-h-screen max-w">
@@ -60,9 +60,15 @@ const GerenciarRebanho = () => {
         <ListaAnimais />
       </div>
 
+
+      
       {adicionarAnimal && (
         <ModalAddAnimal closeModal={setAdicionarAnimal} />
       )}
+
+      
+
+      
 
     </div>
   );

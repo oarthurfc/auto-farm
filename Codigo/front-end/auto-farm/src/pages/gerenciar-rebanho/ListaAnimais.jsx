@@ -2,34 +2,55 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaTrashAlt, FaEdit } from "react-icons/fa"; 
 import BtnClose from "../../components/BtnClose";
-import { getAll, deletar } from "../../services/AnimalService";
+import { getAll, deletar, update } from "../../services/AnimalService"; // import update
+import ModalEditAnimal from './ModalEditAnimal';
 
-const ListaAnimais = ({ setEditarAnimalModal, setAnimalSelecionado }) => {
-
+const ListaAnimais = () => {
   const navigate = useNavigate(); 
+
+  const [animais, setAnimais] = useState([]);
+  const [animalParaEditar, setAnimalParaEditar] = useState(null); // novo estado para animal a ser editado
+  const [modalEditVisivel, setModalEditVisivel] = useState(false);
+  const [animalParaExcluir, setAnimalParaExcluir] = useState(null);
+  const [modalVisivel, setModalVisivel] = useState(false);
+
+  useEffect(() => {
+    getAll().then((res) => setAnimais(res.data));
+  }, []);
 
   const visualizarAnimal = (id) => {
     navigate(`/animal/${id}`);
   };
 
   const abrirModalEditar = (animal) => {
-    setAnimalSelecionado(animal); // Define o animal selecionado
-    setEditarAnimalModal(true); // Abre o modal
+    setAnimalParaEditar(animal); // Define o animal selecionado para edição
+    setModalEditVisivel(true);   // Exibe o modal de edição
   };
 
-  const [animais, setAnimais] = useState([]);
+  const closeModalEdit = () => {
+    setAnimalParaEditar(null);
+    setModalEditVisivel(false); // Fecha o modal
+  };
 
-  useEffect(() => {
-    getAll().then((res) => setAnimais(res.data));
-  }, []);
-
-  const [animalParaExcluir, setAnimalParaExcluir] = useState(null);
-  const [modalVisivel, setModalVisivel] = useState(false);
+  const handleEdit = (updatedAnimal) => {
+    update(updatedAnimal._id, updatedAnimal)
+      .then(() => {
+        // Após atualizar o animal, busca novamente a lista completa de animais
+        return getAll();
+      })
+      .then((res) => {
+        setAnimais(res.data); // Atualiza a lista de animais com os dados mais recentes
+        closeModalEdit(); // Fecha o modal
+      })
+      .catch((error) => {
+        console.error("Erro ao atualizar o animal:", error);
+      });
+  };
 
   const removerAnimal = (id) => {
     deletar(id)
       .then(() => {
-        const novaListaAnimais = animais.filter((animal) => animal.id !== id);
+        const novaListaAnimais = animais.filter((animal) => animal._id !== id);
         setAnimais(novaListaAnimais);
         fecharModal();
       })
@@ -63,7 +84,7 @@ const ListaAnimais = ({ setEditarAnimalModal, setAnimalSelecionado }) => {
             <p className="text-gray-500 text-lg">{a.raca}</p>
           </div>
 
-          {/* Ícones - MUDAR CONFORME SOLICITADO */}
+          {/* Ícones */}
           <div className="flex space-x-5 text-3xl ">
             <FaEye
               className="text-emerald-800 cursor-pointer hover:text-emerald-600 transition duration-300"
@@ -78,7 +99,7 @@ const ListaAnimais = ({ setEditarAnimalModal, setAnimalSelecionado }) => {
             <FaEdit
               className="text-emerald-800 cursor-pointer hover:text-emerald-600 transition duration-300"
               title="Editar"
-              onClick={() => abrirModalEditar(a) }
+              onClick={() => abrirModalEditar(a)} // Abre o modal de edição
             />
           </div>
         </div>
@@ -99,19 +120,27 @@ const ListaAnimais = ({ setEditarAnimalModal, setAnimalSelecionado }) => {
             <div className="flex justify-center space-x-10">
               <button
                 onClick={() => removerAnimal(animalParaExcluir._id)}
-                className="bg-red-500 border-2 border-red-500 text-white px-4 py-2 rounded-lg hover:bg-white hover:text-red-500 transiction duration-300"
+                className="bg-red-500 border-2 border-red-500 text-white px-4 py-2 rounded-lg hover:bg-white hover:text-red-500 transition duration-300"
               >
                 Sim
               </button>
               <button
                 onClick={fecharModal}
-                className="bg-emerald-800 border-2 border-emerald-800 text-white px-4 py-2 rounded-lg hover:bg-white hover:text-emerald-800 transiction duration-300"
+                className="bg-emerald-800 border-2 border-emerald-800 text-white px-4 py-2 rounded-lg hover:bg-white hover:text-emerald-800 transition duration-300"
               >
                 Não
               </button>
             </div>
           </div>
         </div>
+      )}
+
+      {modalEditVisivel && (
+        <ModalEditAnimal
+          closeModal={closeModalEdit}
+          animalSelecionado={animalParaEditar}
+          onEdit={handleEdit} 
+        />
       )}
     </div>
   );
