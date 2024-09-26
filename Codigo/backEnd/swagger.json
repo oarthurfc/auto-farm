@@ -12,54 +12,6 @@
     }
   ],
   "paths": {
-    "/api/protected": {
-      "get": {
-        "summary": "Endpoint protegido",
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Acesso permitido"
-          },
-          "401": {
-            "description": "Não autorizado"
-          },
-          "403": {
-            "description": "Token inválido"
-          }
-        }
-      }
-    },
-    "/api/admin": {
-      "get": {
-        "summary": "Endpoint para administradores",
-        "tags": [
-          "Admin"
-        ],
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Acesso permitido para administradores"
-          },
-          "401": {
-            "description": "Não autorizado"
-          },
-          "403": {
-            "description": "Token inválido"
-          }
-        },
-        "x-roles": [
-          "admin"
-        ]
-      }
-    },
     "/animal": {
       "get": {
         "summary": "Obter todos os animais",
@@ -245,55 +197,7 @@
         }
       }
     },
-    "/login": {
-      "post": {
-        "summary": "Login de usuário",
-        "description": "Autentica um usuário e retorna um token de acesso.",
-        "tags": [
-          "Login"
-        ],
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UserLogin"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Login bem-sucedido.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "accessToken": {
-                      "type": "string",
-                      "description": "Token de acesso gerado."
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Email e senha são obrigatórios."
-          },
-          "401": {
-            "description": "Credenciais inválidas."
-          }
-        }
-      }
-    },
-    "/comprador": {
+        "/comprador": {
       "get": {
         "summary": "Obter todos os compradores",
         "description": "Retorna uma lista de todos os compradores.",
@@ -474,9 +378,6 @@
         "responses": {
           "204": {
             "description": "Comprador deletado com sucesso."
-          },
-          "204": {
-            "description": "Nenhum comprador encontrado com o ID especificado."
           }
         }
       }
@@ -1199,7 +1100,7 @@
         "summary": "Logout do usuário",
         "description": "Realiza o logout de um usuário removendo o token de atualização armazenado.",
         "tags": [
-          "Logout"
+          "Login, Logout e Token"
         ],
         "security": [
           {
@@ -1560,12 +1461,60 @@
         }
       }
     },
+    "/login": {
+      "post": {
+        "summary": "Login de usuário",
+        "description": "Autentica um usuário e retorna um token de acesso.",
+        "tags": [
+          "Login, Logout e Token"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserLogin"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login bem-sucedido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "accessToken": {
+                      "type": "string",
+                      "description": "Token de acesso gerado."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Email e senha são obrigatórios."
+          },
+          "401": {
+            "description": "Credenciais inválidas."
+          }
+        }
+      }
+    },
     "/refresh-token": {
       "get": {
         "summary": "Obter um novo Access Token",
         "description": "Gera um novo access token usando o refresh token armazenado nos cookies.",
         "tags": [
-          "Refresh-token"
+          "Login, Logout e Token"
         ],
         "security": [
           {
@@ -1915,6 +1864,57 @@
           "500": {
             "description": "Erro ao criar a transação"
           }
+        }
+      },
+      "/api/protected": {
+        "get": {
+          "summary": "Endpoint protegido",
+          "tags": [
+            "Login, Logout e Token"
+          ],
+          "security": [
+            {
+              "BearerAuth": []
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Acesso permitido"
+            },
+            "401": {
+              "description": "Não autorizado"
+            },
+            "403": {
+              "description": "Token inválido"
+            }
+          }
+        }
+      },
+      "/api/admin": {
+        "get": {
+          "summary": "Endpoint para administradores",
+          "tags": [
+            "Login, Logout e Token"
+          ],
+          "security": [
+            {
+              "BearerAuth": []
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Acesso permitido para administradores"
+            },
+            "401": {
+              "description": "Não autorizado"
+            },
+            "403": {
+              "description": "Token inválido"
+            }
+          },
+          "x-roles": [
+            "admin"
+          ]
         }
       }
     }
