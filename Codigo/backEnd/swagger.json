@@ -12,54 +12,6 @@
     }
   ],
   "paths": {
-    "/api/protected": {
-      "get": {
-        "summary": "Endpoint protegido",
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Acesso permitido"
-          },
-          "401": {
-            "description": "Não autorizado"
-          },
-          "403": {
-            "description": "Token inválido"
-          }
-        }
-      }
-    },
-    "/api/admin": {
-      "get": {
-        "summary": "Endpoint para administradores",
-        "tags": [
-          "Admin"
-        ],
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Acesso permitido para administradores"
-          },
-          "401": {
-            "description": "Não autorizado"
-          },
-          "403": {
-            "description": "Token inválido"
-          }
-        },
-        "x-roles": [
-          "admin"
-        ]
-      }
-    },
     "/animal": {
       "get": {
         "summary": "Obter todos os animais",
@@ -250,7 +202,7 @@
         "summary": "Login de usuário",
         "description": "Autentica um usuário e retorna um token de acesso.",
         "tags": [
-          "Login"
+          "Login, Logout e Token"
         ],
         "security": [
           {
@@ -474,9 +426,6 @@
         "responses": {
           "204": {
             "description": "Comprador deletado com sucesso."
-          },
-          "204": {
-            "description": "Nenhum comprador encontrado com o ID especificado."
           }
         }
       }
@@ -1199,7 +1148,7 @@
         "summary": "Logout do usuário",
         "description": "Realiza o logout de um usuário removendo o token de atualização armazenado.",
         "tags": [
-          "Logout"
+          "Login, Logout e Token"
         ],
         "security": [
           {
@@ -1565,7 +1514,7 @@
         "summary": "Obter um novo Access Token",
         "description": "Gera um novo access token usando o refresh token armazenado nos cookies.",
         "tags": [
-          "Refresh-token"
+          "Login, Logout e Token"
         ],
         "security": [
           {
@@ -1915,6 +1864,57 @@
           "500": {
             "description": "Erro ao criar a transação"
           }
+        }
+      },
+      "/api/protected": {
+        "get": {
+          "summary": "Endpoint protegido",
+          "tags": [
+            "Login, Logout e Token"
+          ],
+          "security": [
+            {
+              "BearerAuth": []
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Acesso permitido"
+            },
+            "401": {
+              "description": "Não autorizado"
+            },
+            "403": {
+              "description": "Token inválido"
+            }
+          }
+        }
+      },
+      "/api/admin": {
+        "get": {
+          "summary": "Endpoint para administradores",
+          "tags": [
+            "Login, Logout e Token"
+          ],
+          "security": [
+            {
+              "BearerAuth": []
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Acesso permitido para administradores"
+            },
+            "401": {
+              "description": "Não autorizado"
+            },
+            "403": {
+              "description": "Token inválido"
+            }
+          },
+          "x-roles": [
+            "admin"
+          ]
         }
       }
     }
