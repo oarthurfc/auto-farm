@@ -44,33 +44,38 @@ app.get("/termos", (request, response) => {
 
 
 
+
+// USER 
 app.use('/auth',require('./route/AuthRoute'));
 app.use('/register',require('./route/RegisterRoute'));
 //app.use(verifyJWT);
 app.use('/refresh',require('./route/RefreshRoute'));
 app.use('/logout',require('./route/LogoutRoute'));
+
+// ANIMAL
 app.use('/animal',require('./route/AnimalRoute'));
+app.use('/lote',require('./route/LoteRoute'));
+app.use('/historico',require('./route/HistoricoRoute'));
+
+// COMPRADOR
 app.use('/comprador',require('./route/CompradorRoute'));
 app.use('/endereco',require('./route/EnderecoRoute'));
+
+// FUNCIONÁRIO
 app.use('/funcionario',require('./route/FuncionarioRoute'));
-app.use('/historico',require('./route/HistoricoRoute'));
-app.use('/lote',require('./route/LoteRoute'));
 app.use('/tarefa',require('./route/TarefaRoute'));
+app.use('/tarefaFuncionario',require('./route/TarefaFuncionarioRoute'));
+
+// FINANCEIRO
 app.use('/transacao',require('./route/TransacaoRoute'));
 app.use('/despesa',require('./route/DespesaRoute'));
-app.use('/tarefaFuncionario',require('./route/TarefaFuncionarioRoute'));
+
+// PASTO
 app.use('/pasto',require('./route/PastoRoute'));
 
- 
-
-
- 
-
-    mongoose.connection.once('open', () => {
-        console.log('Connected to the MongoDB');
-        app.listen(PORT, () => {
-            console.log(`Server running on port ${PORT}`);
-        });
-    })
-
-
+mongoose.connection.once('open', () => {
+    console.log('Connected to the MongoDB');
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+    });
+})

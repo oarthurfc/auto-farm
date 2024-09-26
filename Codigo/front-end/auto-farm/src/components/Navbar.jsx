@@ -11,7 +11,7 @@ const Navbar = () => {
 
         <ul className="flex space-x-20 items-center ">
           <li>
-            <Link to="/" className="text-white text-lg hover:text-gray-300">Login</Link>
+            <Link to="/login" className="text-white text-lg hover:text-gray-300">Login</Link>
           </li>
           <li>
             <Link to="/cadastro" className="text-white text-lg hover:text-gray-300">Cadastro</Link>
@@ -21,9 +21,6 @@ const Navbar = () => {
           </li>
         </ul>
         </div>
-        
-        
-
         <div className="text-white text-2xl font-bold mx-6">
           AutoFarm
         </div>
