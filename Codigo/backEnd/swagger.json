@@ -197,55 +197,7 @@
         }
       }
     },
-    "/login": {
-      "post": {
-        "summary": "Login de usuário",
-        "description": "Autentica um usuário e retorna um token de acesso.",
-        "tags": [
-          "Login, Logout e Token"
-        ],
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UserLogin"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Login bem-sucedido.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "accessToken": {
-                      "type": "string",
-                      "description": "Token de acesso gerado."
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Email e senha são obrigatórios."
-          },
-          "401": {
-            "description": "Credenciais inválidas."
-          }
-        }
-      }
-    },
-    "/comprador": {
+        "/comprador": {
       "get": {
         "summary": "Obter todos os compradores",
         "description": "Retorna uma lista de todos os compradores.",
@@ -1505,6 +1457,54 @@
           },
           "500": {
             "description": "Erro ao deletar pasto."
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "summary": "Login de usuário",
+        "description": "Autentica um usuário e retorna um token de acesso.",
+        "tags": [
+          "Login, Logout e Token"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserLogin"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login bem-sucedido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "accessToken": {
+                      "type": "string",
+                      "description": "Token de acesso gerado."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Email e senha são obrigatórios."
+          },
+          "401": {
+            "description": "Credenciais inválidas."
           }
         }
       }
