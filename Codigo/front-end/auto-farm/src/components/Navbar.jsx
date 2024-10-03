@@ -1,26 +1,35 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom'; // Importar o useNavigate
+import { AuthContext } from '../contexts/AuthContex';
 
 const Navbar = () => {
+  const auth = useContext(AuthContext);
+  const navigate = useNavigate(); // Obter o hook de navegação
+
+  const handleLogout = async () => {
+    await auth.signout(); // Chama o signout do contexto
+    navigate('/login'); // Redireciona para a página de login após o signout
+  };
+
   return (
     <nav className="bg-emerald-800 py-4">
       <div className="flex items-center justify-between max-w-7xl mx-auto">
-          <div className="flex items-center gap-4">
-            <img src="/favIcon.png" alt="Logo" className="h-12" />  
-            <p className="text-white text-3xl font-bold">AutoFarm</p>
-          </div>
+        <div className="flex items-center gap-4">
+          <img src="/favIcon.png" alt="Logo" className="h-12" />
+          <p className="text-white text-3xl font-bold">AutoFarm</p>
+        </div>
 
-          <ul className="flex space-x-20 items-center ">
-            <li>
-              <Link to="/login" className="text-white text-lg hover:text-gray-300">Login</Link>
-            </li>
-            <li>
-              <Link to="/cadastro" className="text-white text-lg hover:text-gray-300">Cadastro</Link>
-            </li>
-            <li>
-              <Link to="/gerenciar-rebanho" className={`text-white text-lg hover:text-gray-300`} >Gerenciar Rebanho</Link>
-            </li>
-          </ul>
+        <nav className="flex space-x-20 items-center">
+          <Link to="/cadastro" className="text-white text-lg hover:text-gray-300">
+            Cadastrar Administrador
+          </Link>
+          <Link to="/gerenciar-rebanho" className="text-white text-lg hover:text-gray-300">
+            Gerenciar Rebanho
+          </Link>
+          <button onClick={handleLogout} className="text-white text-lg hover:text-gray-300">
+            Sair
+          </button> 
+        </nav>
       </div>
     </nav>
   );

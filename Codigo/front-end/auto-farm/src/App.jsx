@@ -1,69 +1,41 @@
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Outlet,
-} from "react-router-dom";
-// PAGINAS
+import { Routes, Route, Outlet } from "react-router-dom";
+// PÁGINAS
 import LoginPage from "./pages/login";
 import CadastroPage from "./pages/cadastro";
 import GerenciarRebanho from "./pages/gerenciar-rebanho";
 import AnimalDetalhes from './pages/detalhes-animal/index';
 
-import Navbar from "./components/Navbar"; 
-import ProtectedRoute from "./components/ProtectedRoute"; // Importa o componente de proteção
+// COMPONENTES
+import Navbar from "./components/Navbar";
+import { RequireAuth } from "./contexts/RequireAuth"; // Proteção de rotas
 
+// Layout que inclui a Navbar
 const Layout = () => {
   return (
     <div>
       <Navbar /> 
-      <div className=""> 
-        <Outlet /> 
+      <div>
+        <Outlet /> {/* Exibe as rotas filhas aqui */}
       </div>
     </div>
   );
 };
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Layout />, 
-    children: [
-      {
-        path: "/cadastro",
-        element: (
-          <ProtectedRoute>
-            <CadastroPage />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/gerenciar-rebanho",
-        element: (
-          <ProtectedRoute>
-            <GerenciarRebanho />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/detalhes-animal/:id",
-        element: (
-          <ProtectedRoute>
-            <AnimalDetalhes />
-          </ProtectedRoute>
-        ),
-      },
-    ],
-  },
-  { 
-    path: "/login",
-    element: <LoginPage />
-  }
-]);
-
 function App() {
   return (
     <div>
-      <RouterProvider router={router} />
+      <Routes>
+        {/* Rota pública: Login */}
+        <Route path="/login" element={<LoginPage />} />
+
+        {/* Layout com Navbar para rotas privadas */}
+        <Route path="/" element={<RequireAuth><Layout /></RequireAuth>}>
+          {/* Rotas protegidas */}
+          <Route path="cadastro" element={<CadastroPage />} />
+          <Route path="gerenciar-rebanho" element={<GerenciarRebanho />} />
+          <Route path="detalhes-animal/:id" element={<AnimalDetalhes />} />
+        </Route>
+      </Routes>
     </div>
   );
 }
