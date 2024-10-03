@@ -47,7 +47,7 @@ function CadastroPage() {
   return (
     <div className="min-h-screen py-12 flex items-center justify-center bg-emerald-50">
       <div className="flex flex-col justify-center items-center w-full max-w-xl p-12 bg-white shadow-shape rounded-[20px] gap-8">
-        <img src="public/favIcon.png" className="max-w-[117px]" alt="Logo AutoFarm" />
+        <img src="favIcon.png" className="max-w-[117px]" alt="Logo AutoFarm" />
         <h1 className="text-[40px] text-center font-semibold text-emerald-950 leading-tight">
           Crie uma nova conta de administrador
         </h1>
