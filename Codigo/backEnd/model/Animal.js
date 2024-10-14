@@ -26,6 +26,10 @@ const animalSchema = new Schema({
         type : String,
         required : true
     },
+    valor : {
+        type : Number,
+        required : false
+    },
     pastoId: {  
         type: Schema.Types.ObjectId,  
         ref: 'Pasto',  

@@ -25,6 +25,7 @@ const createNewAnimal = async (req, res) => {
             sexo : req.body.sexo,
             nascimento : req.body.nascimento,
             raca : req.body.raca,
+            valor : req.body.valor,
             pastoId: req.body.pastoId
 
         });
@@ -48,6 +49,7 @@ const updateAnimal = async (req, res) => {
         if (req.body?.nome) animal.nome = req.body.nome;
         if (req.body?.raca) animal.raca = req.body.raca; 
         if (req.body?.sexo) animal.sexo = req.body.sexo;
+        if (req.body?.valor) animal.valor = req.body.valor;
         if (req.body?.nascimento) animal.nascimento = req.body.nascimento;
 
         const result = await animal.save();

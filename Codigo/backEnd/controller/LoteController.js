@@ -22,6 +22,8 @@ const createNewLote = async (req, res) => {
     try {
         const result = await Lote.create({
             data: req.body.data,
+            quantidade: req.body.quantidade,
+            valorTotal: req.body.valor,
             animalId: req.body.animalId
         });
         return res.status(201).json(result);
@@ -40,6 +42,8 @@ const updateLote = async (req, res) => {
 
     // Atualizando os campos, se fornecidos
     if (req.body?.data) lote.data = req.body.data;
+    if (req.body?.quantidade) lote.quantidade = req.body.quantidade;
+    if (req.body?.valor) lote.valorTotal = req.body.valor;
 
     const result = await lote.save();
     return res.json(result);

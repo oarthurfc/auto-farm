@@ -10,7 +10,7 @@ export const getById = (id) => {
     return axios.get(`${BASE_URL}/${id}`);
 };
 
-export const create = (animalData) => {
+export const    create = (animalData) => {
     return axios.post(BASE_URL, animalData);
 };
 

@@ -7,6 +7,14 @@ const loteSchema = new Schema({
         type : Date,
         required : true
     },
+    quantidade: {
+        type: Number,
+        required: true
+    },
+    valorTotal: {
+        type: Number,
+        required: true
+    },
     animalId: {
         type: Schema.Types.ObjectId,
         ref: 'Animal',
