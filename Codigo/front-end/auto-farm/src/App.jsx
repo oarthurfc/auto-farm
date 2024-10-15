@@ -8,6 +8,8 @@ import AnimalDetalhes from './pages/detalhes-animal/index';
 // COMPONENTES
 import Navbar from "./components/Navbar";
 import { RequireAuth } from "./contexts/RequireAuth"; // Proteção de rotas
+import GerenciarFuncionarios from "./pages/gerenciar-funcionario";
+import FuncionarioDetalhes from "./pages/detalhes-funcionario";
 
 // Layout que inclui a Navbar
 const Layout = () => {
@@ -34,6 +36,8 @@ function App() {
           <Route path="cadastro" element={<CadastroPage />} />
           <Route path="gerenciar-rebanho" element={<GerenciarRebanho />} />
           <Route path="detalhes-animal/:id" element={<AnimalDetalhes />} />
+          <Route path="funcionarios" element={<GerenciarFuncionarios/>}/>
+          <Route path="funcionario/:id" element={<FuncionarioDetalhes/>} />
         </Route>
       </Routes>
     </div>
