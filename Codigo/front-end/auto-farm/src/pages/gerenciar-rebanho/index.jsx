@@ -2,14 +2,18 @@ import { useState, useEffect } from "react";
 import { FaPlus } from "react-icons/fa";
 import ListaAnimais from "./ListaAnimais";
 import ModalAddAnimal from "./ModalAddAnimal";
+import ModalSellAnimal from "./ModalSellAnimal";
 
 const GerenciarRebanho = () => {
   const [adicionarAnimal, setAdicionarAnimal] = useState(false);
-  
+  const [venderAnimal, setVenderAnimal] = useState(false);
+
   // Altera o título da página
   useEffect(() => {
     document.title = "Gerenciar Rebanho - AutoFarm";
   }, []);
+
+
 
   return (
     <div className="pt-10 bg-emerald-50 min-h-screen max-w">
@@ -21,7 +25,9 @@ const GerenciarRebanho = () => {
       {/* Container dos botões e barra de pesquisa */}
       <div className="flex flex-col sm:flex-row items-center justify-center mb-5 mt-10 gap-5 px-4">
         {/* Botão Vender Animal */}
-        <button className="bg-emerald-500 hover:bg-green-600 text-white font-bold py-3 px-14 rounded w-full sm:w-auto">
+        <button className="bg-emerald-500 hover:bg-green-600 text-white font-bold py-3 px-14 rounded w-full sm:w-auto"
+          onClick={() => setVenderAnimal(true)}
+        >
           Vender Animal
         </button>
 
@@ -66,6 +72,10 @@ const GerenciarRebanho = () => {
       
       {adicionarAnimal && (
         <ModalAddAnimal closeModal={setAdicionarAnimal} />
+      )}
+
+      {venderAnimal && (
+        <ModalSellAnimal closeModal={() => setVenderAnimal(false)}/>
       )}
 
     </div>
