@@ -19,6 +19,8 @@ const createNewPasto = async (req, res) => {
     try {
         const result = await Pasto.create({
             nome: req.body.nome,
+            dataInicial: req.body.dataInicial,
+            dataFinal: req.body.dataFinal,
             tamanho: req.body.tamanho
         });
         res.status(201).json(result);
@@ -38,6 +40,8 @@ const updatePasto = async (req, res) => {
         }
 
         if (req.body.nome) pasto.nome = req.body.nome;
+        if (req.body.dataInicial) pasto.dataInicial = req.body.dataInicial;
+        if (req.body.dataFinal) pasto.dataFinal = req.body.dataFinal;
         if (req.body.tamanho) pasto.tamanho = req.body.tamanho;
 
         const result = await pasto.save();
