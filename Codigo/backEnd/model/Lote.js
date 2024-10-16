@@ -15,11 +15,11 @@ const loteSchema = new Schema({
         type: Number,
         required: true
     },
-    animalId: {
+    animalId: [{
         type: Schema.Types.ObjectId,
         ref: 'Animal',
         required: true
-    }
+    }]
 })
 
 module.exports = mongoose.model('Lote',loteSchema)
