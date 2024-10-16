@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }) => {
     const data = await login(email, password);
     if (data.accessToken) {
       setAccessToken(data.accessToken);
-      Cookies.set('accessToken', data.accessToken, { expires: 1 }); // Armazenando o token no cookie com expiração de 1 dia
+      Cookies.set('accessToken', data.accessToken, { expires: 1/96 }); // Expira em 15 minutos
       return true;
     }
     return false;
