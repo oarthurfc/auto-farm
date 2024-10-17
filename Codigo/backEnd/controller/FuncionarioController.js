@@ -48,16 +48,16 @@ const updateFuncionario = async (req, res) => {
 
 // Função para deletar um funcionário
 const deleteFuncionario = async (req, res) => {
-    if (!req?.body?.id) {
+    if (!req?.params?.id) {
         return res.status(400).json({ "message": "ID é necessário." });
     }
 
-    const funcionario = await Funcionario.findOne({ _id: req.body.id }).exec();
+    const funcionario = await Funcionario.findOne({ _id: req.params.id }).exec();
     if (!funcionario) {
         return res.status(204).json({ "message": `Nenhum funcionário encontrado com o ID ${req.body.id}.` });
     }
 
-    const result = await Funcionario.deleteOne({ _id: req.body.id });
+    const result = await Funcionario.deleteOne({ _id: req.params.id });
     return res.json(result);
 };
 
