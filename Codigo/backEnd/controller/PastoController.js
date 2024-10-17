@@ -21,7 +21,6 @@ const createNewPasto = async (req, res) => {
             nome: req.body.nome,
             dataInicial: req.body.dataInicial,
             dataFinal: req.body.dataFinal,
-            tamanho: req.body.tamanho
         });
         res.status(201).json(result);
     } catch (err) {
@@ -33,17 +32,17 @@ const createNewPasto = async (req, res) => {
 // Atualizar um pasto existente
 const updatePasto = async (req, res) => {
     try {
-        const pasto = await Pasto.findOne({ _id: req.body.id }).exec();
+        const pasto = await Pasto.findOne({ _id: req.params.id }).exec();  // ID vindo dos parâmetros da URL
 
         if (!pasto) {
-            return res.status(404).json({ message: `Nenhum pasto encontrado para o ID ${req.body.id}` });
+            return res.status(404).json({ message: `Nenhum pasto encontrado para o ID ${req.params.id}` });
         }
 
+        // Atualizar campos se fornecidos no corpo da requisição
         if (req.body.nome) pasto.nome = req.body.nome;
         if (req.body.dataInicial) pasto.dataInicial = req.body.dataInicial;
         if (req.body.dataFinal) pasto.dataFinal = req.body.dataFinal;
-        if (req.body.tamanho) pasto.tamanho = req.body.tamanho;
-
+        
         const result = await pasto.save();
         res.json(result);
     } catch (err) {
@@ -52,26 +51,28 @@ const updatePasto = async (req, res) => {
     }
 };
 
+
 // Deletar um pasto
 const deletePasto = async (req, res) => {
     try {
-        if (!req?.body?.id) {
+        if (!req?.params?.id) {  // ID vindo dos parâmetros da URL
             return res.status(400).json({ message: 'O parâmetro ID é necessário' });
         }
 
-        const pasto = await Pasto.findOne({ _id: req.body.id }).exec();
+        const pasto = await Pasto.findOne({ _id: req.params.id }).exec();  // ID vindo dos parâmetros da URL
 
         if (!pasto) {
-            return res.status(404).json({ message: `Nenhum pasto encontrado para o ID ${req.body.id}` });
+            return res.status(404).json({ message: `Nenhum pasto encontrado para o ID ${req.params.id}` });
         }
 
-        const result = await pasto.deleteOne({ _id: req.body.id });
+        const result = await pasto.deleteOne();  // Deleta o pasto
         res.json({ message: 'Pasto deletado com sucesso', result });
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: 'Erro ao deletar pasto' });
     }
 };
+
 
 // Buscar um pasto por ID
 const getPastoById = async (req, res) => {
