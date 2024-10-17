@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-const BASE_URL = 'http://localhost:3500/animal';
+const BASE_URL = 'http://localhost:3500/tarefa';
 
 // Cria uma instância do Axios
 const api = axios.create({
@@ -10,8 +10,7 @@ const api = axios.create({
 
 // Adiciona um interceptor para incluir o Bearer Token
 api.interceptors.request.use((config) => {
-    const token = Cookies.get('accessToken'); 
-    console.log(token);
+    const token = Cookies.get('accessToken');
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;
     }
@@ -20,26 +19,27 @@ api.interceptors.request.use((config) => {
     return Promise.reject(error);
 });
 
+// Função para buscar todas as tarefas
 export const getAll = () => {
     return api.get('/');
 };
 
+// Função para buscar uma tarefa por ID
 export const getById = (id) => {
     return api.get(`/${id}`);
 };
 
-export const create = (animalData) => {
-    return api.post('/', animalData);
+// Função para criar uma nova tarefa
+export const create = (tarefaData) => {
+    return api.post('/', tarefaData);
 };
 
+// Função para atualizar uma tarefa existente
 export const update = (id, updatedData) => {
     return api.put(`/${id}`, updatedData);
 };
 
+// Função para deletar uma tarefa
 export const deletar = (id) => {
     return api.delete(`/${id}`);
-};
-
-export const getLote = () => {
-    return axios.get(`${BASE_URL}/lote`);
 };

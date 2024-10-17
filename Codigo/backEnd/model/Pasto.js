@@ -7,6 +7,14 @@ const pastoSchema = new Schema({
         type : String,
         required : true
     },
+    dataInicial: {
+        type: Date,
+        default: Date.now
+    },
+    dataFinal: {
+        type: Date,
+        required: false
+    },
     tamanho : {
         type : Number,
         required : true

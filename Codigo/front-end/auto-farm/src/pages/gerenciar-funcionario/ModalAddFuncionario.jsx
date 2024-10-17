@@ -9,14 +9,16 @@ const ModalAddFuncionario = ({ closeModal }) => {
 
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
-  const [cargo, setCargo] = useState(""); // Novo campo para o cargo
+  const [cargo, setCargo] = useState("Contador"); // Valor padrão
   const [horas, setHoras] = useState("");
   const [salario, setSalario] = useState("");
   const [senha, setSenha] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(cargo)
+
+    // Verifica se "Outro" foi selecionado e usa o valor de 'cargoOutro'
+
     const newFuncionario = {
       nome: nome,
       email: email,
@@ -28,13 +30,13 @@ const ModalAddFuncionario = ({ closeModal }) => {
 
     create(newFuncionario)
       .then(() => {
-        handleCloseModal(); // Fecha o modal após o sucesso
-        alert(`${newFuncionario.nome} foi adicionado com sucesso!`); // Mensagem de sucesso
+        handleCloseModal(); 
+        alert(`${newFuncionario.nome} foi adicionado com sucesso!`);
         window.location.reload();
       })
       .catch((error) => {
         console.error("Erro ao cadastrar funcionário:", error);
-        alert("Preencha todos os campos corretamente!"); // Mensagem de erro
+        alert("Preencha todos os campos corretamente!");
       });
   };
 
@@ -49,6 +51,7 @@ const ModalAddFuncionario = ({ closeModal }) => {
           <span className="text-emerald-800 font-semibold">Nome</span>
           <input
             type="text"
+            maxLength={25}
             placeholder="João Matos"
             className="h-12 border border-[#E3E3E3] rounded-[4px] p-4 font-normal placeholder-[#90A0B7] text-sm text-emerald-950"
             value={nome}
@@ -67,17 +70,22 @@ const ModalAddFuncionario = ({ closeModal }) => {
           />
         </div>
 
-        {/* Campo para o cargo do funcionário */}
+        {/* Dropdown para o cargo do funcionário */}
         <div className="flex flex-col gap-1">
           <span className="text-emerald-800 font-semibold">Cargo</span>
-          <input
-            type="text"
-            placeholder="Gerente"
-            className="h-12 border border-[#E3E3E3] rounded-[4px] p-4 font-normal placeholder-[#90A0B7] text-sm text-emerald-950"
+          <select
+            className="h-12 border border-[#E3E3E3] rounded-[4px] p-2 font-normal text-sm text-emerald-950"
             value={cargo}
             onChange={(e) => setCargo(e.target.value)}
-          />
+          >
+            <option value="Contador">Contador</option>
+            <option value="Fazendeiro">Fazendeiro</option>
+            <option value="Veterinário">Veterinário</option>
+            <option value="Outro">Outro</option>
+          </select>
         </div>
+
+    
 
         <div className="flex gap-5">
           <div className="flex flex-col gap-1">
@@ -104,10 +112,11 @@ const ModalAddFuncionario = ({ closeModal }) => {
         </div>
 
         <div className="flex flex-col gap-1">
-          <span className="text-emerald-800 font-semibold">Senha</span>
+          <span className="text-emerald-800 font-semibold">Telefone</span>
           <input
-            type="password"
-            placeholder="********"
+            type="tel"
+            maxLength={15}
+            placeholder="(31) 98888-8888"
             className="h-12 border border-[#E3E3E3] rounded-[4px] p-4 font-normal placeholder-[#90A0B7] text-sm text-emerald-950"
             value={senha}
             onChange={(e) => setSenha(e.target.value)}

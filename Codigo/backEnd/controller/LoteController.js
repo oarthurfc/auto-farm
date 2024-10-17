@@ -25,6 +25,7 @@ const createNewLote = async (req, res) => {
             quantidade: req.body.quantidade,
             valorTotal: req.body.valor,
             animalId: req.body.animalId
+
         });
         return res.status(201).json(result);
     } catch (err) {
