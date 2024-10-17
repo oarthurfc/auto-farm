@@ -8,7 +8,7 @@ import fotoVeterinario from "../../assets/foto_veterinario.png";
 import fotoContador from "../../assets/foto_contador.png";
 import fotoFazendeiro from "../../assets/foto_fazendeiro.png";
 
-const ListaFuncionarios = ({ funcionarios, setFuncionarios }) => {
+const ListaFuncionarios = ({ funcionarios, setFuncionarios, searchTerm  }) => {
   const navigate = useNavigate(); 
 
   const [funcionarioParaEditar, setFuncionarioParaEditar] = useState(null);
@@ -16,8 +16,6 @@ const ListaFuncionarios = ({ funcionarios, setFuncionarios }) => {
   const [funcionarioParaExcluir, setFuncionarioParaExcluir] = useState(null);
   const [modalVisivel, setModalVisivel] = useState(false);
   
-  // Novo estado para o termo de pesquisa
-  const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
@@ -92,19 +90,7 @@ const ListaFuncionarios = ({ funcionarios, setFuncionarios }) => {
 
   return (
     <div className="p-4 lg:p-10">
-      {/* Barra de pesquisa */}
-      <div className="flex w-full sm:w-auto justify-center mb-5">
-        <input
-          type="text"
-          placeholder="Pesquisar por nome"
-          value={searchTerm}
-          onChange={handleSearch}
-          className="border-2 border-emerald-800 rounded-lg py-3 px-10 w-full sm:w-auto mr-1"
-        />
-        <button className="text-emerald-800 hover:text-white hover:bg-emerald-800 px-2 rounded transition duration-200">
-          <FaSearch className="w-6 h-6" />
-        </button>
-      </div>
+      
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {filteredFuncionarios.map((f) => (
