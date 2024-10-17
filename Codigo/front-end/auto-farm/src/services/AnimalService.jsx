@@ -38,3 +38,7 @@ export const update = (id, updatedData) => {
 export const deletar = (id) => {
     return api.delete(`/${id}`);
 };
+
+export const getLote = () => {
+    return axios.get(`${BASE_URL}/lote`);
+};

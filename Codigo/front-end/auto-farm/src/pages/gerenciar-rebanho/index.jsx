@@ -3,11 +3,13 @@ import { FaPlus } from "react-icons/fa";
 import ListaAnimais from "./ListaAnimais";
 import ModalAddAnimal from "./ModalAddAnimal";
 import ModalSellAnimal from "./ModalSellAnimal";
+import ModalSellLote from "./ModalSellLote";
 import { getAll } from '../../services/AnimalService';
 
 const GerenciarRebanho = () => {
   const [adicionarAnimal, setAdicionarAnimal] = useState(false);
   const [venderAnimal, setVenderAnimal] = useState(false);
+  const [venderLote, setVenderLote] = useState(false);
   const [animais, setAnimais] = useState([]);
 
   const [totalAnimais, setTotalAnimais] = useState(0);
@@ -42,6 +44,13 @@ const GerenciarRebanho = () => {
           onClick={() => setVenderAnimal(true)}
         >
           Vender Animal
+        </button>
+
+        <button
+          className="bg-emerald-500 hover:bg-green-600 text-white font-bold py-3 px-14 rounded w-full sm:w-auto"
+          onClick={() => setVenderLote(true)}
+          >
+          Vender Lote
         </button>
 
         <button
@@ -93,6 +102,7 @@ const GerenciarRebanho = () => {
 
       {adicionarAnimal && <ModalAddAnimal closeModal={setAdicionarAnimal} />}
       {venderAnimal && <ModalSellAnimal closeModal={() => setVenderAnimal(false)} />}
+      {venderLote && <ModalSellLote closeModal={() => setVenderLote(false)} />}
     </div>
   );
 };

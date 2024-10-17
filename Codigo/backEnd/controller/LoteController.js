@@ -44,6 +44,7 @@ const updateLote = async (req, res) => {
     if (req.body?.data) lote.data = req.body.data;
     if (req.body?.quantidade) lote.quantidade = req.body.quantidade;
     if (req.body?.valor) lote.valorTotal = req.body.valor;
+    if (req.body?.animalId) lote.animalId = req.body.animalId;
 
     const result = await lote.save();
     return res.json(result);
