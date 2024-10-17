@@ -1,22 +1,29 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaUserTie, FaEye, FaEdit } from "react-icons/fa"; // FaUserTie será o ícone da pessoa
+import { FaEye, FaTrashAlt, FaEdit, FaSearch } from "react-icons/fa"; // Adicionando FaSearch
 import BtnClose from "../../components/BtnClose";
 import { getAll, deletar, update } from "../../services/FuncionarioService";
-import ModalEditFuncionario from './ModalEditFuncionario'; // Supondo que o modal de edição de funcionário esteja implementado
+import ModalEditFuncionario from './ModalEditFuncionario';
+import fotoVeterinario from "../../assets/foto_veterinario.png";
+import fotoContador from "../../assets/foto_contador.png";
+import fotoFazendeiro from "../../assets/foto_fazendeiro.png";
 
-const ListaFuncionarios = () => {
+const ListaFuncionarios = ({ funcionarios, setFuncionarios, searchTerm }) => {
   const navigate = useNavigate(); 
 
-  const [funcionarios, setFuncionarios] = useState([]);
   const [funcionarioParaEditar, setFuncionarioParaEditar] = useState(null);
   const [modalEditVisivel, setModalEditVisivel] = useState(false);
   const [funcionarioParaExcluir, setFuncionarioParaExcluir] = useState(null);
   const [modalVisivel, setModalVisivel] = useState(false);
 
-  useEffect(() => {
-    getAll().then((res) => setFuncionarios(res.data));
-  }, []);
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  // Função para filtrar funcionários com base no nome
+  const filteredFuncionarios = funcionarios.filter((funcionario) =>
+    funcionario.nome.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const visualizarFuncionario = (id) => {
     navigate(`/funcionario/${id}`);
@@ -66,33 +73,65 @@ const ListaFuncionarios = () => {
     setModalVisivel(false);
   };
 
-  return (
-    <div className="p-10">
+  const getImagemFuncionario = (cargo) => {
+    switch (cargo) {
+      case "Veterinário":
+        return fotoVeterinario;
+      case "Contador":
+        return fotoContador;
+      case "Fazendeiro":
+      case "Outro":
+        return fotoFazendeiro;
+      default:
+        return fotoFazendeiro;
+    }
+  };
 
-      
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {funcionarios.map((f) => (
+  // Cálculos de verbas salariais
+  const totalFuncionarios = filteredFuncionarios.length;
+  const totalSalario = filteredFuncionarios.reduce((acc, funcionario) => acc + funcionario.salario, 0);
+  const mediaSalario = totalFuncionarios > 0 ? (totalSalario / totalFuncionarios).toFixed(2) : 0;
+
+  return (
+    <div className="p-4 lg:p-10">
+      {/* Exibir as informações de verba salarial */}
+      <div className="mb-10">
+        <p><strong>Total de Funcionários:</strong> {totalFuncionarios}</p>
+        <p><strong>Verba Salarial Total:</strong> R$ {totalSalario.toFixed(2)}</p>
+        <p><strong>Média de Salário:</strong> R$ {mediaSalario}</p>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {filteredFuncionarios.map((f) => (
           <div
             key={f._id}
-            className="border border-black rounded-lg shadow-lg p-5 mx-2 text-center relative bg-white "
+            className="border border-black rounded-lg shadow-lg p-4 lg:p-5 mx-2 text-center relative bg-white"
           >
-            <FaUserTie className="text-8xl text-gray-400 mx-auto mb-4" /> {/* Ícone da pessoa */}
-            <p className="text-xl font-semibold text-gray-700 mb-2">{f.nome}</p>
-            <p className="text-sm text-gray-500">{f.cargo}</p> {/* Cargo do funcionário */}
+            <img
+              src={getImagemFuncionario(f.cargo)}
+              alt={f.cargo}
+              className="mx-auto mb-4 w-24 h-24 sm:w-32 sm:h-32 object-cover rounded-full"
+            />
+            <p className="text-lg font-semibold text-gray-700 mb-2">{f.nome}</p>
+            <p className="text-sm text-gray-500">{f.cargo}</p>
 
             <div className="absolute top-3 right-3 flex flex-col space-y-2">
-                <FaEye
-                    className="text-2xl text-emerald-800 cursor-pointer hover:text-emerald-600 transition duration-300"
-                    title="Visualizar"
-                    onClick={() => visualizarFuncionario(f._id)}
-                />
-                <FaEdit
-                    className="text-2xl text-emerald-800 cursor-pointer hover:text-emerald-600 transition duration-300"
-                    title="Editar"
-                    onClick={() => abrirModalEditar(f)}
-                />
-</div>
-
+              <FaEye
+                className="text-2xl text-emerald-800 cursor-pointer hover:text-emerald-600 transition duration-300"
+                title="Visualizar"
+                onClick={() => visualizarFuncionario(f._id)}
+              />
+              <FaEdit
+                className="text-2xl text-emerald-800 cursor-pointer hover:text-emerald-600 transition duration-300"
+                title="Editar"
+                onClick={() => abrirModalEditar(f)}
+              />
+              <FaTrashAlt
+                className="text-2xl text-emerald-800 cursor-pointer hover:text-red-500 transition duration-300"
+                title="Deletar"
+                onClick={() => abrirModal(f)}
+              />
+            </div>
           </div>
         ))}
       </div>
@@ -105,9 +144,9 @@ const ListaFuncionarios = () => {
             <h2 className="text-xl font-semibold mb-0 mt-3">
               Deseja excluir este funcionário?
             </h2>
-            <p className="text-gray-700 mb-8 text-base">
-              Você está prestes a deletar o funcionário de ID: <br />{" "}
-              {funcionarioParaExcluir?._id}.
+            <p className="text-gray-700 mb-8 mt-2 text-base">
+              Você está prestes a deletar o funcionário: <br />{" "}
+              <strong>{funcionarioParaExcluir?.nome}.</strong>
             </p>
             <div className="flex justify-center space-x-10">
               <button
@@ -126,7 +165,7 @@ const ListaFuncionarios = () => {
           </div>
         </div>
       )}
-     
+
       {modalEditVisivel && (
         <ModalEditFuncionario
           closeModal={closeModalEdit}

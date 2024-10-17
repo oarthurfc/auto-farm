@@ -4,6 +4,8 @@ import LoginPage from "./pages/login";
 import CadastroPage from "./pages/cadastro";
 import GerenciarRebanho from "./pages/gerenciar-rebanho";
 import AnimalDetalhes from './pages/detalhes-animal/index';
+import GerenciarTransacoes from './pages/gerenciar-transacoes/index';
+import MonitorarPastagemPage from "./pages/monitorar-pastagem";
 
 // COMPONENTES
 import Navbar from "./components/Navbar";
@@ -37,7 +39,9 @@ function App() {
           <Route path="gerenciar-rebanho" element={<GerenciarRebanho />} />
           <Route path="detalhes-animal/:id" element={<AnimalDetalhes />} />
           <Route path="funcionarios" element={<GerenciarFuncionarios/>}/>
+          <Route path="gerenciar-transacoes" element={<GerenciarTransacoes/>}/>
           <Route path="funcionario/:id" element={<FuncionarioDetalhes/>} />
+          <Route path="monitorar-pastagem" element={<MonitorarPastagemPage/>}/>
         </Route>
       </Routes>
     </div>

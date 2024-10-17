@@ -14,11 +14,7 @@ const pastoSchema = new Schema({
     dataFinal: {
         type: Date,
         required: false
-    },
-    tamanho : {
-        type : Number,
-        required : true
-    },
+    }
 })
 
 module.exports = mongoose.model('Pasto',pastoSchema)

@@ -57,6 +57,7 @@ const ModalEditFuncionario = ({ closeModal, funcionarioSelecionado, onEdit }) =>
           <span className="text-emerald-800 font-semibold">Nome</span>
           <input
             type="text"
+            maxLength={35}
             placeholder="Nome do Funcionário"
             className="h-12 border border-[#E3E3E3] rounded-[4px] p-4 font-normal placeholder-[#90A0B7] text-sm text-emerald-950"
             value={nome}
@@ -77,9 +78,10 @@ const ModalEditFuncionario = ({ closeModal, funcionarioSelecionado, onEdit }) =>
           </div>
 
           <div className="flex flex-col gap-1 w-1/2">
-            <span className="text-emerald-800 font-semibold">Senha</span>
+            <span className="text-emerald-800 font-semibold">Telefone</span>
             <input
-              type="password"
+              type="tel"
+              maxLength={15}
               placeholder="Senha do Funcionário"
               className="h-12 border border-[#E3E3E3] rounded-[4px] p-4 font-normal placeholder-[#90A0B7] text-sm text-emerald-950"
               value={senha}
@@ -88,15 +90,19 @@ const ModalEditFuncionario = ({ closeModal, funcionarioSelecionado, onEdit }) =>
           </div>
         </div>
 
-        <div className="flex flex-col gap-1 mt-4">
+        {/* Dropdown para o cargo do funcionário */}
+        <div className="flex flex-col gap-1">
           <span className="text-emerald-800 font-semibold">Cargo</span>
-          <input
-            type="text"
-            placeholder="Cargo do Funcionário"
-            className="h-12 border border-[#E3E3E3] rounded-[4px] p-4 font-normal placeholder-[#90A0B7] text-sm text-emerald-950"
+          <select
+            className="h-12 border border-[#E3E3E3] rounded-[4px] p-2 font-normal text-sm text-emerald-950"
             value={cargo}
             onChange={(e) => setCargo(e.target.value)}
-          />
+          >
+            <option value="Contador">Contador</option>
+            <option value="Fazendeiro">Fazendeiro</option>
+            <option value="Veterinário">Veterinário</option>
+            <option value="Outro">Outro</option>
+          </select>
         </div>
 
         <div className="flex gap-4 mt-4">
