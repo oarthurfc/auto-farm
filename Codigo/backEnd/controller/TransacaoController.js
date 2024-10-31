@@ -18,23 +18,40 @@ const getAllTransacoes = async (req, res) => {
 };
 
 // Função para criar uma nova transação
-const createNewTransacao = async (req, res) => {
-    try {
-        const result = await Transacao.create({
-            tipoTransacao: req.body.tipoTransacao,
-            data: req.body.data,
-            preco: req.body.preco,
-            loteId: req.body.loteId,
-            leilaoId: req.body.leilaoId
-        });
-        return res.status(201).json(result);
-    } catch (err) {
-        console.error(err);
-        return res.status(500).json({ "message": "Erro ao criar transação." });
-    }
+const mapTransacaoFields = (target, source) => {
+    const fields = ['tipoTransacao', 'data', 'preco', 'loteId', 'leilaoId'];
+    fields.forEach(field => {
+        target[field] = source[field] !== undefined ? source[field] : null;
+    });
 };
 
-// Função para atualizar uma transação existente
+// Controlador para criar uma nova transação
+const createNewTransacao = async (req, res) => {
+    try {
+        const transacaoData = {};
+        
+        // Mapeando os campos de req.body para transacaoData
+        mapTransacaoFields(transacaoData, req.body);
+
+        // Cria a transação com os dados mapeados
+        const transacao = new Transacao(transacaoData);
+        await transacao.save();
+
+        // Relaciona cada Animal com a transação (se necessário)
+        if (transacaoData.animais && transacaoData.animais.length > 0) {
+            await Animal.updateMany(
+                { _id: { $in: transacaoData.animais } },
+                { transacaoId: transacao._id }
+            );
+        }
+
+        res.status(201).json(transacao);
+    } catch (error) {
+        console.error('Erro ao criar transação:', error);
+        res.status(500).json({ message: 'Erro ao criar transação.' });
+    }
+};
+// Controlador para atualizar uma transação existente
 const updateTransacao = async (req, res) => {
     try {
         const transacao = await Transacao.findOne({ _id: req.body.id }).exec();
@@ -42,16 +59,14 @@ const updateTransacao = async (req, res) => {
             return res.status(204).json({ "message": `Nenhuma transação encontrada com o ID ${req.body.id}.` });
         }
 
-        // Atualizando os campos, se fornecidos
-        if (req.body?.tipoTransacao) transacao.tipoTransacao = req.body.tipoTransacao;
-        if (req.body?.data) transacao.data = req.body.data;
-        if (req.body?.preco) transacao.preco = req.body.preco;
+        // Atualiza a transação usando a função de mapeamento
+        mapTransacaoFields(transacao, req.body);
 
         const result = await transacao.save();
         return res.json(result);
     } catch (err) {
-        console.error(err);
-        return res.status(500).json({ "message": "Erro ao atualizar transação." });
+        console.error("Erro ao atualizar transação:", err.message);
+        return res.status(500).json({ message: "Erro ao atualizar transação." });
     }
 };
 
