@@ -24,7 +24,7 @@ const transacaoSchema = new Schema({
     loteId: {
         type: Schema.Types.ObjectId,
         ref: 'Lote',
-        required: true
+        required: false
     },
     valorArroba: {
         type: Number,
@@ -41,7 +41,7 @@ const transacaoSchema = new Schema({
     leilaoId: {
         type: Schema.Types.ObjectId,
         ref: 'Leilao',
-        required: true
+        required: false
     },
     animais: [
         {

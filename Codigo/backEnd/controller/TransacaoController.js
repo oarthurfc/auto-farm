@@ -19,7 +19,7 @@ const getAllTransacoes = async (req, res) => {
 
 // Função para criar uma nova transação
 const mapTransacaoFields = (target, source) => {
-    const fields = ['tipoTransacao', 'data', 'preco', 'loteId', 'leilaoId'];
+    const fields = ['tipoTransacao', 'data', 'valorTotal', 'loteId', 'valorArroba', 'nomeComprador', 'pesoTotal', 'leilaoId', 'animais'];
     fields.forEach(field => {
         target[field] = source[field] !== undefined ? source[field] : null;
     });
