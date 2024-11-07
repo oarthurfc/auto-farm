@@ -2,16 +2,13 @@ import { useState, useEffect } from "react";
 import { FaPlus } from "react-icons/fa";
 import ListaAnimais from "./ListaAnimais";
 import ModalAddAnimal from "./ModalAddAnimal";
-import ModalSellAnimal from "./ModalSellAnimal";
 import ModalSellLote from "./ModalSellLote";
 import { getAll } from '../../services/AnimalService';
 
 const GerenciarRebanho = () => {
   const [adicionarAnimal, setAdicionarAnimal] = useState(false);
-  const [venderAnimal, setVenderAnimal] = useState(false);
   const [venderLote, setVenderLote] = useState(false);
   const [animais, setAnimais] = useState([]);
-
   const [totalAnimais, setTotalAnimais] = useState(0);
   const [femeas, setFemeas] = useState(0);
   const [machos, setMachos] = useState(0);
@@ -38,13 +35,6 @@ const GerenciarRebanho = () => {
 
       {/* Container dos botões e barra de pesquisa */}
       <div className="flex flex-col sm:flex-row items-center justify-center mb-5 mt-10 gap-5 px-4">
-        {/* Botão Vender Animal */}
-        <button
-          className="bg-emerald-500 hover:bg-green-600 text-white font-bold py-3 px-14 rounded w-full sm:w-auto"
-          onClick={() => setVenderAnimal(true)}
-        >
-          Vender Animal
-        </button>
 
         <button
           className="bg-emerald-500 hover:bg-green-600 text-white font-bold py-3 px-14 rounded w-full sm:w-auto"
@@ -101,7 +91,6 @@ const GerenciarRebanho = () => {
       </div>
 
       {adicionarAnimal && <ModalAddAnimal closeModal={setAdicionarAnimal} />}
-      {venderAnimal && <ModalSellAnimal closeModal={() => setVenderAnimal(false)} />}
       {venderLote && <ModalSellLote closeModal={() => setVenderLote(false)} />}
     </div>
   );

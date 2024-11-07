@@ -1,138 +1,154 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "react"; 
 import BtnClose from "../../components/BtnClose";
-import { getLote, deletar } from "../../services/AnimalService";
-import { create } from "../../services/TransacoesService"; // Importando create e getAllLotes
-import { getAllLotes } from "../../services/LoteService";
+import { getAll, deletar } from "../../services/AnimalService";
+import { create } from "../../services/TransacoesService";
 
 const ModalSellLote = ({ closeModal }) => {
-    const [animaisLote, setAnimaisLote] = useState([]);
-    const [valorTotalLote, setValorTotalLote] = useState(0);
-    const [sellDate, setSellDate] = useState("");
-    const [lotes, setLotes] = useState([]);
-    const [loteId, setLoteId] = useState(""); // Estado para armazenar o lote selecionado
+    const [animais, setAnimais] = useState([]);
+    const [animaisSelecionados, setAnimaisSelecionados] = useState([]);
+    const [valorTotal, setValorTotal] = useState("");
+    const [data, setData] = useState("");
+    const [valorArroba, setValorArroba] = useState("");
+    const [pesoTotal, setPesoTotal] = useState("");
+    const [nomeComprador, setNomeComprador] = useState("");
 
-    const handleCloseModal = () => {
-        closeModal(false);
-    }
-
-    // Função que busca todos os lotes ao montar o componente
     useEffect(() => {
-        getAllLotes().then((res) => {
-            setLotes(res.data); // Armazena todos os lotes no estado
+        getAll().then((res) => {
+            console.log("Animais carregados:", res.data);
+            setAnimais(res.data);
         });
     }, []);
 
-    // Função que busca o lote selecionado e atualiza os animais e o valor total
-    useEffect(() => {
-        if (loteId) {
-            getLote(loteId).then((res) => {
-                const lote = res.data;
-                setAnimaisLote(lote.animais);
-                setValorTotalLote(lote.valorTotal);
-            });
-        } else {
-            // Reseta os dados se nenhum lote for selecionado
-            setAnimaisLote([]);
-            setValorTotalLote(0);
-        }
-    }, [loteId]);
+    const handleAnimalSelection = (animalId) => {
+        setAnimaisSelecionados((prevSelecionados) => {
+            if (prevSelecionados.includes(animalId)) {
+                return prevSelecionados.filter((id) => id !== animalId);
+            } else {
+                return [...prevSelecionados, animalId];
+            }
+        });
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (!sellDate) {
-            alert("Por favor, selecione uma data de venda.");
-            return;
-        }
-
-        const transacao = {
-            tipo: "ganho",
-            valor: valorTotalLote,
-            data: sellDate,
+        const newTransacao = {
+            tipoTransacao: "ganho",
+            valorTotal: parseFloat(valorTotal),
+            data: data,
+            valorArroba: parseFloat(valorArroba),
+            pesoTotal: parseFloat(pesoTotal),
+            nomeComprador: nomeComprador,
+            animais: animaisSelecionados
         };
 
-        create(transacao)
+
+        console.log("Transação a ser enviada:", newTransacao);
+
+        create(newTransacao)
             .then(() => {
-                Promise.all(animaisLote.map((animalId) => deletar(animalId)))
+                Promise.all(animaisSelecionados.map((animalId) => deletar(animalId)))
                     .then(() => {
-                        alert("Lote vendido com sucesso!");
-                        handleCloseModal();
-                        window.location.reload(); // Você pode querer substituir isso por uma atualização do estado
+                        alert(`Novo ${newTransacao.tipoTransacao} foi registrado nas transações.`);
+                        closeModal();
+                        window.location.reload();
                     })
                     .catch((error) => {
                         console.error("Erro ao deletar animais:", error);
-                        alert("Erro ao vender o lote.");
+                        alert("Erro ao processar a venda.");
                     });
             })
             .catch((error) => {
                 console.error("Erro ao criar transação:", error);
+                console.error("Detalhes do erro:", error.response?.data); // Inclui detalhes da resposta
                 alert("Erro ao registrar transação.");
             });
     };
 
     return (
-        <div className="fixed inset-0 flex items-start justify-center bg-black bg-opacity-70">
-            <div className="min-w-[475px] flex overflow-y-auto max-h-[100vh] scale-90 lg:scale-105 lg:mt-20 flex-col gap-6 bg-white p-10 rounded-lg shadow-lg text-start relative mt-5">
-                <BtnClose fecharModal={handleCloseModal} />
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70">
+            <div className="w-full max-w-xl max-h-[90vh] overflow-y-auto flex flex-col gap-6 bg-white p-8 rounded-lg shadow-lg text-start relative">
+                <BtnClose fecharModal={closeModal} />
 
-                <h1 className="text-emerald-950 text-2xl font-bold">Vender Lote</h1>
+                <h1 className="text-emerald-950 text-2xl font-bold">Vender Animais</h1>
 
                 <div className="flex flex-col gap-1">
-                    <span className="text-emerald-800 font-semibold">Selecione o Lote</span>
-                    <select
-                        className="h-12 border border-[#E3E3E3] rounded-[4px] p-2 font-normal text-sm text-emerald-950"
-                        value={loteId}
-                        onChange={(e) => setLoteId(e.target.value)}
-                    >
-                        <option value="" disabled>
-                            Selecione o lote
-                        </option>
-                        {lotes.map((lote) => (
-                            <option key={lote._id} value={lote._id}>
-                                {lote._id}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-
-                <div className="flex flex-col gap-1 mt-4">
-                    <span className="text-emerald-800 font-semibold">Animais no Lote</span>
-                    <ul className="list-disc list-inside">
-                        {animaisLote.length > 0 ? (
-                            animaisLote.map((animalId) => (
-                                <li key={animalId} className="text-emerald-950">{animalId}</li>
-                            ))
-                        ) : (
-                            <li className="text-emerald-950">Nenhum animal encontrado neste lote.</li>
-                        )}
-                    </ul>
-                </div>
-
-                <div className="flex flex-col gap-1 mt-4">
-                    <span className="text-emerald-800 font-semibold">Valor Total do Lote</span>
+                    <span className="text-emerald-800 font-semibold">Nome do Comprador</span>
                     <input
                         type="text"
-                        readOnly
-                        value={`R$ ${valorTotalLote.toFixed(2)}`}
-                        className="h-12 border border-[#E3E3E3] rounded-[4px] p-4 font-normal text-sm text-emerald-950"
+                        className="h-12 border border-[#E3E3E3] rounded-[4px] p-2 font-normal text-sm text-emerald-950"
+                        value={nomeComprador}
+                        onChange={(e) => setNomeComprador(e.target.value)}
                     />
                 </div>
 
+                {/* Inputs organizados em duas colunas */}
+                <div className="grid grid-cols-2 gap-4 mt-4">
+                    <div className="flex flex-col gap-1">
+                        <span className="text-emerald-800 font-semibold">Valor Total</span>
+                        <input
+                            type="number"
+                            className="h-12 border border-[#E3E3E3] rounded-[4px] p-2 font-normal text-sm text-emerald-950"
+                            value={valorTotal}
+                            onChange={(e) => setValorTotal(e.target.value)}
+                        />
+                    </div>
+
+                    <div className="flex flex-col gap-1">
+                        <span className="text-emerald-800 font-semibold">Data da Venda</span>
+                        <input
+                            type="date"
+                            className="h-12 border border-[#E3E3E3] rounded-[4px] p-2 font-normal text-sm text-emerald-950"
+                            value={data}
+                            onChange={(e) => setData(e.target.value)}
+                        />
+                    </div>
+
+                    <div className="flex flex-col gap-1">
+                        <span className="text-emerald-800 font-semibold">Valor por Arroba</span>
+                        <input
+                            type="number"
+                            className="h-12 border border-[#E3E3E3] rounded-[4px] p-2 font-normal text-sm text-emerald-950"
+                            value={valorArroba}
+                            onChange={(e) => setValorArroba(e.target.value)}
+                        />
+                    </div>
+
+                    <div className="flex flex-col gap-1">
+                        <span className="text-emerald-800 font-semibold">Peso Total</span>
+                        <input
+                            type="number"
+                            className="h-12 border border-[#E3E3E3] rounded-[4px] p-2 font-normal text-sm text-emerald-950"
+                            value={pesoTotal}
+                            onChange={(e) => setPesoTotal(e.target.value)}
+                        />
+                    </div>
+                </div>
+
                 <div className="flex flex-col gap-1 mt-4">
-                    <span className="text-emerald-800 font-semibold">Data da Venda</span>
-                    <input
-                        type="date"
-                        className="h-12 border border-[#E3E3E3] rounded-[4px] p-4 font-normal text-sm text-emerald-950"
-                        value={sellDate}
-                        onChange={(e) => setSellDate(e.target.value)}
-                    />
+                    <span className="text-emerald-800 font-semibold">Selecione Animais</span>
+                    <ul className="list-inside">
+                        {animais.map((animal) => (
+                            <li key={animal._id} className="text-emerald-950">
+                                <label className="inline-flex items-center">
+                                    <input
+                                        type="checkbox"
+                                        className="mr-2"
+                                        checked={animaisSelecionados.includes(animal._id)}
+                                        onChange={() => handleAnimalSelection(animal._id)}
+                                    />
+                                    {`${animal.nome} - ID: ${animal._id}`}
+                                </label>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
 
                 <button
                     className="bg-emerald-500 text-white text-xl rounded-md p-2 mt-6 hover:bg-green-600"
                     onClick={handleSubmit}
                 >
-                    Vender Lote
+                    Registrar Venda
                 </button>
             </div>
         </div>
