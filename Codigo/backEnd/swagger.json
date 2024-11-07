@@ -1461,7 +1461,7 @@
         }
       }
     },
-    "/login": {
+    "/auth": {
       "post": {
         "summary": "Login de usuário",
         "description": "Autentica um usuário e retorna um token de acesso.",
@@ -1778,7 +1778,7 @@
         }
       }
     },
-    "/transacoes": {
+    "/transacao": {
       "get": {
         "summary": "Obtém todas as transações",
         "tags": [
@@ -1844,13 +1844,33 @@
                   },
                   "leilaoId": {
                     "type": "string"
+                  },    "valorArroba": {
+                    "type": "number",
+                    "nullable": true
+                  },
+                  "nomeComprador": {
+                    "type": "string"
+                  },
+                  "pesoTotal": {
+                    "type": "number",
+                    "nullable": true
+                  },
+                  "valorTotal": {
+                    "type": "number"
+                  },
+                  "animais": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
                   }
                 },
                 "required": [
                   "tipoTransacao",
                   "data",
-                  "preco",
+                  "valorTotal",
                   "loteId",
+                  "nomeComprador",
                   "leilaoId"
                 ]
               }
@@ -1919,6 +1939,7 @@
       }
     }
   },
+  
   "components": {
     "securitySchemes": {
       "BearerAuth": {
