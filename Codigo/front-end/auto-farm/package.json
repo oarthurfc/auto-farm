@@ -12,7 +12,7 @@
   "dependencies": {
     "auto-farm": "file:",
     "axios": "^1.7.7",
-    "chart.js": "^4.4.5",
+    "chart.js": "^4.4.6",
     "js-cookie": "^3.0.5",
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.453.0",

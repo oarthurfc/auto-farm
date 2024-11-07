@@ -97,10 +97,30 @@ const getAnimalById = async (req, res) => {
     }
 }
 
+const getAnimalsCountByYear = async (req, res) => {
+    try {
+        const data = await Animal.aggregate([
+            {
+                $group: {
+                    _id: { $year: "$nascimento" },  // Agrupa por ano de nascimento
+                    count: { $sum: 1 }              // Conta o número de animais por ano
+                }
+            },
+            { $sort: { _id: 1 } }                // Ordena por ano (crescente)
+        ]);
+
+        res.json(data);
+    } catch (error) {
+        console.error("Erro ao agrupar animais por ano:", error);
+        res.status(500).json({ message: 'Erro ao agrupar animais por ano' });
+    }
+};
+
 module.exports = {
     getAllAnimals,
     createNewAnimal,
     updateAnimal,
     deleteAnimal,
-    getAnimalById
+    getAnimalById,
+    getAnimalsCountByYear
 }

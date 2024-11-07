@@ -32,6 +32,9 @@ const Navbar = () => {
           <Link to="/monitorar-pastagem" className="text-white text-lg hover:text-gray-300">
             Pastagem
           </Link>
+          <Link to="/relatorio" className="text-white text-lg hover:text-gray-300">
+            Relatório
+          </Link>
           <button onClick={handleLogout} className="text-white text-lg hover:text-gray-300">
             Sair
           </button> 

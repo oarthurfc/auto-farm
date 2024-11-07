@@ -13,6 +13,7 @@ import { RequireAuth } from "./contexts/RequireAuth"; // Proteção de rotas
 import GerenciarFuncionarios from "./pages/gerenciar-funcionario";
 import FuncionarioDetalhes from "./pages/detalhes-funcionario";
 import PaginaPrincipal from "./pages/gerenciar-despezas/index";
+import RelatorioPage from "./pages/relatorio";
 
 // Layout que inclui a Navbar
 const Layout = () => {
@@ -44,6 +45,7 @@ function App() {
           <Route path="funcionario/:id" element={<FuncionarioDetalhes/>} />
           <Route path="monitorar-pastagem" element={<MonitorarPastagemPage/>}/>
           <Route path="gerenciar-despesas" element={<PaginaPrincipal/>}/>
+          <Route path="relatorio" element={<RelatorioPage/>}/>
         </Route>
       </Routes>
     </div>
