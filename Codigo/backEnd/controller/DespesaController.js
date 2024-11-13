@@ -35,10 +35,10 @@ const createNewDespesa = async (req, res) => {
 // Atualizar uma despesa existente
 const updateDespesa = async (req, res) => {
     try {
-        const despesa = await Despesa.findOne({ _id: req.body.id }).exec();
+        const despesa = await Despesa.findOne({ _id: req.params.id }).exec();
 
         if (!despesa) {
-            return res.status(404).json({ message: `Nenhuma despesa encontrada para o ID ${req.body.id}` });
+            return res.status(404).json({ message: `Nenhuma despesa encontrada para o ID ${req.params.id}` });
         }
 
         if (req.body.nome) despesa.nome = req.body.nome;
@@ -59,17 +59,17 @@ const updateDespesa = async (req, res) => {
 // Deletar uma despesa
 const deleteDespesa = async (req, res) => {
     try {
-        if (!req?.body?.id) {
+        if (!req?.params?.id) {
             return res.status(400).json({ message: 'O parâmetro ID é necessário' });
         }
 
-        const despesa = await Despesa.findOne({ _id: req.body.id }).exec();
+        const despesa = await Despesa.findOne({ _id: req.params.id }).exec();
 
         if (!despesa) {
-            return res.status(404).json({ message: `Nenhuma despesa encontrada para o ID ${req.body.id}` });
+            return res.status(404).json({ message: `Nenhuma despesa encontrada para o ID ${req.params.id}` });
         }
 
-        const result = await despesa.deleteOne({ _id: req.body.id });
+        const result = await despesa.deleteOne({ _id: req.params.id });
         res.json({ message: 'Despesa deletada com sucesso', result });
     } catch (err) {
         console.error(err);

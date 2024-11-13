@@ -54,9 +54,11 @@ const createNewTransacao = async (req, res) => {
 // Controlador para atualizar uma transação existente
 const updateTransacao = async (req, res) => {
     try {
-        const transacao = await Transacao.findOne({ _id: req.body.id }).exec();
+        
+        const transacao = await Transacao.findOne({ _id: req.params.id }).exec();
+        console.log("oiiii \n \n \n \n OIUIII")
         if (!transacao) {
-            return res.status(204).json({ "message": `Nenhuma transação encontrada com o ID ${req.body.id}.` });
+            return res.status(204).json({ "message": `Nenhuma transação encontrada com o ID ${req.params.id}.` });
         }
 
         // Atualiza a transação usando a função de mapeamento
@@ -73,16 +75,16 @@ const updateTransacao = async (req, res) => {
 // Função para deletar uma transação
 const deleteTransacao = async (req, res) => {
     try {
-        if (!req?.body?.id) {
+        if (!req?.params?.id) {
             return res.status(400).json({ "message": "ID é necessário." });
         }
 
-        const transacao = await Transacao.findOne({ _id: req.body.id }).exec();
+        const transacao = await Transacao.findOne({ _id: req.params.id }).exec();
         if (!transacao) {
-            return res.status(204).json({ "message": `Nenhuma transação encontrada com o ID ${req.body.id}.` });
+            return res.status(204).json({ "message": `Nenhuma transação encontrada com o ID ${req.params.id}.` });
         }
 
-        const result = await Transacao.deleteOne({ _id: req.body.id });
+        const result = await Transacao.deleteOne({ _id: req.params.id });
         return res.json(result);
     } catch (err) {
         console.error(err);
