@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getAllDespesas } from '../../services/DespesaService';
 import { getAllTransacoes } from '../../services/TransacoesService';
+import { Link } from 'react-router-dom'; // Importando o Link para navegação
 
 const SideBar = ({ filtroMes, filtroAno }) => {
   const [totalDespesas, setTotalDespesas] = useState(0);
@@ -113,6 +114,16 @@ const SideBar = ({ filtroMes, filtroAno }) => {
         ) : (
           <p className="text-gray-600">Nenhuma despesa registrada.</p>
         )}
+      </div>
+
+      {/* Link para consultar extratos */}
+      <div className="mt-6">
+        <Link
+          to="/extratos"
+          className="text-blue-600 hover:text-blue-700 font-semibold underline"
+        >
+          Consultar Extratos
+        </Link>
       </div>
     </div>
   );

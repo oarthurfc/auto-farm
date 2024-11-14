@@ -41,7 +41,7 @@ function App() {
           <Route path="gerenciar-rebanho" element={<GerenciarRebanho />} />
           <Route path="detalhes-animal/:id" element={<AnimalDetalhes />} />
           <Route path="funcionarios" element={<GerenciarFuncionarios/>}/>
-          <Route path="gerenciar-transacoes" element={<GerenciarTransacoes/>}/>
+          <Route path="extratos" element={<GerenciarTransacoes/>}/>
           <Route path="funcionario/:id" element={<FuncionarioDetalhes/>} />
           <Route path="monitorar-pastagem" element={<MonitorarPastagemPage/>}/>
           <Route path="gerenciar-despesas" element={<PaginaPrincipal/>}/>

@@ -21,13 +21,16 @@ const Navbar = () => {
 
         <nav className="flex space-x-20 items-center">
           <Link to="/cadastro" className="text-white text-lg hover:text-gray-300">
-            Administrador
+            Adm.
           </Link>
           <Link to="/funcionarios" className="text-white text-lg hover:text-gray-300">
             Funcionários
           </Link>
           <Link to="/gerenciar-rebanho" className="text-white text-lg hover:text-gray-300">
             Rebanho
+          </Link>
+          <Link to="/gerenciar-despesas" className="text-white text-lg hover:text-gray-300">
+            Extratos
           </Link>
           <Link to="/monitorar-pastagem" className="text-white text-lg hover:text-gray-300">
             Pastagem
