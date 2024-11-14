@@ -12,16 +12,18 @@ const GerenciarDespesa = ({ filtroMes, setFiltroMes, filtroAno, setFiltroAno }) 
     const fetchDespesas = async () => {
       try {
         const res = await getAllDespesas();
-        const despesasFiltradas = res.data.filter((despesa) => {
-          const dataDespesa = new Date(despesa.data);
-          return (
-            dataDespesa.getMonth() + 1 === parseInt(filtroMes) &&
-            dataDespesa.getFullYear() === parseInt(filtroAno)
-          );
-        });
-        setDespesas(despesasFiltradas);
-        const total = despesasFiltradas.reduce((acc, despesa) => acc + despesa.preco, 0);
-        setTotalDespesas(total);
+        if (res.data) {
+          const despesasFiltradas = res.data.filter((despesa) => {
+            const dataDespesa = new Date(despesa.data);
+            return (
+              dataDespesa.getMonth() + 1 === parseInt(filtroMes) &&
+              dataDespesa.getFullYear() === parseInt(filtroAno)
+            );
+          });
+          setDespesas(despesasFiltradas);
+          const total = despesasFiltradas.reduce((acc, despesa) => acc + (parseFloat(despesa.preco) || 0), 0); // Verifica se 'preco' é um número válido
+          setTotalDespesas(total);
+        }
       } catch (error) {
         console.error('Erro ao buscar despesas:', error);
       }
@@ -30,16 +32,18 @@ const GerenciarDespesa = ({ filtroMes, setFiltroMes, filtroAno, setFiltroAno }) 
     const fetchTransacoes = async () => {
       try {
         const res = await getAllTransacoes();
-        const transacoesFiltradas = res.data.filter((transacao) => {
-          const dataTransacao = new Date(transacao.data);
-          return (
-            dataTransacao.getMonth() + 1 === parseInt(filtroMes) &&
-            dataTransacao.getFullYear() === parseInt(filtroAno)
-          );
-        });
-        setTransacoes(transacoesFiltradas);
-        const total = transacoesFiltradas.reduce((acc, transacao) => acc + transacao.preco, 0);
-        setTotalReceitas(total);
+        if (res.data) {
+          const transacoesFiltradas = res.data.filter((transacao) => {
+            const dataTransacao = new Date(transacao.data);
+            return (
+              dataTransacao.getMonth() + 1 === parseInt(filtroMes) &&
+              dataTransacao.getFullYear() === parseInt(filtroAno)
+            );
+          });
+          setTransacoes(transacoesFiltradas);
+          const total = transacoesFiltradas.reduce((acc, transacao) => acc + (parseFloat(transacao.preco) || 0), 0); // Verifica se 'preco' é um número válido
+          setTotalReceitas(total);
+        }
       } catch (error) {
         console.error('Erro ao buscar transações:', error);
       }
@@ -50,13 +54,14 @@ const GerenciarDespesa = ({ filtroMes, setFiltroMes, filtroAno, setFiltroAno }) 
   }, [filtroMes, filtroAno]);
 
   const totalGeral = totalDespesas + totalReceitas;
+  
   const percentualDespesas = totalGeral ? (totalDespesas / totalGeral) * 100 : 0;
   const percentualReceitas = totalGeral ? (totalReceitas / totalGeral) * 100 : 0;
 
   return (
     <div className="p-4">
       <h1 className="text-3xl font-bold pb-10 text-emerald-900">Gerenciar Finanças</h1>
-
+      
       {/* Filtro para mês e ano usando input type="month" */}
       <div className="mb-6">
         <label htmlFor="filtroData" className="mr-2 text-lg font-semibold">Selecione o Mês e Ano:</label>
