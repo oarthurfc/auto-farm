@@ -84,13 +84,13 @@ const aplicarFiltro = () => {
       </h1>
 
       <div className="flex flex-col sm:flex-row items-center justify-center mb-5 mt-10 gap-5 px-4">
-        <button
+        {/* <button
           className="bg-emerald-800 hover:bg-emerald-900 text-white font-bold py-3 px-20 rounded w-full sm:w-auto flex items-center justify-center"
           onClick={() => setAdicionarTransacao(true)}
         >
           <FaPlus className="mr-2" />
           Adicionar Transação
-        </button>
+        </button> */}
 
         <div className="flex w-full sm:w-auto">
           <input

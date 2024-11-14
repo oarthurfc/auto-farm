@@ -14,7 +14,7 @@ const TransacaoDetalhes = () => {
   }, []);
 
   useEffect(() => {
-    getTransacaoById(id)
+    getById(id)
       .then((res) => {
         setTransacao(res.data);
       })
@@ -46,13 +46,22 @@ const TransacaoDetalhes = () => {
     );
   }
 
+  const calcularPesoEmArrobas = (pesoTotal) => {
+    return (pesoTotal / 15).toFixed(2); // Calcula o peso em arrobas com 2 casas decimais
+  };
+
+  const calcularPesoMedio = (pesoTotal, quantidadeAnimais) => {
+    if (quantidadeAnimais === 0) return 0;
+    return (pesoTotal / quantidadeAnimais).toFixed(2); // Calcula o peso médio por animal com 2 casas decimais
+  };
+
   return (
     <div className="w-full min-h-screen bg-emerald-50">
       <div className="pb-12">
         <div className="max-w-7xl mx-auto p-10 flex items-center justify-between relative">
           <FaArrowLeft
             className="text-emerald-800 text-3xl hover:scale-105 hover:cursor-pointer"
-            onClick={() => navigate(`/lista-transacoes`)}
+            onClick={() => navigate(`/extratos`)}
           />
           <h1 className="text-4xl sm:text-5xl text-center font-semibold text-emerald-800 flex-grow">
             Detalhes da Transação
@@ -65,7 +74,7 @@ const TransacaoDetalhes = () => {
             <div className="text-2xl">
               <h2 className="text-emerald-800 font-bold mb-4">Transação</h2>
               <p className="text-gray-700 mb-5">
-                <strong>Tipo de Transação:</strong> {transacao.tipoTransacao}
+                <strong>ID da Transação:</strong> {transacao._id}
               </p>
               <p className="text-gray-700 mb-5">
                 <strong>Data:</strong> {formatDate(transacao.data)}
@@ -79,19 +88,31 @@ const TransacaoDetalhes = () => {
               <p className="text-gray-700 mb-5">
                 <strong>Peso Total:</strong> {transacao.pesoTotal} kg
               </p>
+
+              <p className="text-gray-700 mb-5">
+                <strong>Peso em Arroba:</strong> {calcularPesoEmArrobas(transacao.pesoTotal)} @
+              </p>
+
+              <p className="text-gray-700 mb-4">
+                <strong>Peso Médio por Animal:</strong> {calcularPesoMedio(transacao.pesoTotal, transacao.animais.length)} kg
+              </p>
+
+              
               <p className="text-gray-700 mb-5">
                 <strong>Nome do Comprador:</strong> {transacao.nomeComprador}
+              </p>
+              <p className="text-gray-700 mb-4">
+                <strong>Quantidade de Animais Vendidos:</strong> {transacao.animais.length}
               </p>
             </div>
 
             <div className="text-xl">
-              <h3 className="text-emerald-800 font-bold mb-4">Animais</h3>
+              <h3 className="text-emerald-800 font-bold mb-4">ID's dos animais vendidos</h3>
               <ul className="list-disc ml-5 space-y-2">
                 {transacao.animais.length > 0 ? (
-                  transacao.animais.map((animal) => (
-                    <li key={animal._id} className="text-gray-700">
-                      <strong>ID:</strong> {animal._id}, <strong>Nome:</strong>{" "}
-                      {animal.nome}, <strong>Peso:</strong> {animal.peso} kg
+                  transacao.animais.map((animalId) => (
+                    <li key={animalId} className="text-gray-700">
+                      <strong>ID:</strong> {animalId}
                     </li>
                   ))
                 ) : (

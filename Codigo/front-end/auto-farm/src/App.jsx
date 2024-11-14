@@ -47,7 +47,8 @@ function App() {
           <Route path="monitorar-pastagem" element={<MonitorarPastagemPage/>}/>
           <Route path="gerenciar-despesas" element={<PaginaPrincipal/>}/>
           <Route path="relatorio" element={<RelatorioPage/>}/>
-          <Route path="detalhes-transacoes/:id" element={<TransacaoDetalhes/>} />
+          <Route path="gerenciar-transacoes" element={<GerenciarTransacoes/>}/>
+          <Route path="detalhes-transacao/:id" element={<TransacaoDetalhes />} />
         </Route>
       </Routes>
     </div>

@@ -3,10 +3,13 @@ import { FaTrashAlt, FaEdit, FaEye } from "react-icons/fa";
 import { deletarTransacao } from "../../services/TransacoesService";
 import { deleteDespesa } from "../../services/DespesaService";
 import BtnClose from "../../components/BtnClose";
+import { useNavigate } from "react-router-dom";
+
 
 const ListaFinanceira = ({ listaFinanceira, setListaFinanceira }) => {
   const [itemParaExcluir, setItemParaExcluir] = useState(null);
   const [modalVisivel, setModalVisivel] = useState(false);
+  const navigate = useNavigate(); 
 
   const formatarData = (data) => {
     const date = new Date(data);
@@ -15,6 +18,10 @@ const ListaFinanceira = ({ listaFinanceira, setListaFinanceira }) => {
       month: "2-digit",
       year: "numeric",
     });
+  };
+
+  const visualizarTransacao = (id) => {
+    navigate(`/detalhes-transacao/${id}`);
   };
 
   const transacoesAgrupadas = listaFinanceira.reduce((acc, item) => {
@@ -86,14 +93,19 @@ const ListaFinanceira = ({ listaFinanceira, setListaFinanceira }) => {
                   </div>
 
                   <div className="flex flex-wrap space-x-4 justify-start">
-                    <div className="relative grid grid-cols-1 mr-5">
-                      <p className="text-emerald-700 font-bold text-xl">
-                        {item.valorTotal || item.preco || item.valor} R$
-                      </p>
-                      <p className="text-gray-600 capitalize mb-3">
-                        <strong>{item.tipo}</strong>
-                      </p>
-                    </div>
+                  <div className="relative grid grid-cols-1 mr-5">
+                  <p
+                    className={`font-bold text-xl ${
+                      item.tipoDesepesa ? "text-red-500" : "text-emerald-700"
+                    }`}
+                  >
+                    {item.valorTotal || item.preco || item.valor} R$
+                  </p>
+                  <p className="text-gray-600 capitalize mb-3">
+                    <strong>{item.tipo}</strong>
+                  </p>
+                </div>
+
 
                     <div className="relative grid grid-cols-1  text-start ">
                       {item.nomeComprador && (
@@ -135,16 +147,22 @@ const ListaFinanceira = ({ listaFinanceira, setListaFinanceira }) => {
                   </div>
 
                   <div className="absolute top-6 right-4 flex space-x-2">
+                  {item.tipoTransacao && (
                     <button className="text-blue-500 hover:text-blue-700 text-xl mr-1">
-                      <FaEye />
+                      <FaEye 
+                        title="Visualizar"
+                        onClick={() => visualizarTransacao(item._id)}
+                      />
                     </button>
-                    <button
-                      className="text-red-500 hover:text-red-700 text-xl"
-                      onClick={() => abrirModalExcluir(item)}
-                    >
-                      <FaTrashAlt />
-                    </button>
-                  </div>
+                  )}
+                  <button
+                    className="text-red-500 hover:text-red-700 text-xl"
+                    onClick={() => abrirModalExcluir(item)}
+                  >
+                    <FaTrashAlt />
+                  </button>
+                </div>
+
                 </div>
               ))}
             </div>

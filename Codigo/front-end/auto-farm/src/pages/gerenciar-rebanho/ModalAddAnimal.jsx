@@ -63,7 +63,7 @@ const ModalAddAnimal = ({closeModal}) => {
                 <div className="flex flex-col gap-1">
                     <span className="text-emerald-800 font-semibold">Sexo</span>
                     <select 
-                        className="h-12 border border-[#E3E3E3] rounded-[4px] p-4 font-normal text-sm  text-emerald-950 "
+                        className="h-12 border border-[#E3E3E3] rounded-[4px] p-3 font-normal text-sm  text-emerald-950 "
                         value={animalSexo} 
                         onChange={(e) => setAnimalSexo(e.target.value)}
                     >
