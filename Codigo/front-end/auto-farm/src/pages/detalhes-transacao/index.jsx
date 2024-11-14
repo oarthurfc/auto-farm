@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { getById } from "../../services/TransacoesService"; // Função para buscar a transação pelo ID
+import { getById } from "../../services/TransacoesService"; 
 
 const TransacaoDetalhes = () => {
   const navigate = useNavigate();

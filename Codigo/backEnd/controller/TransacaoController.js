@@ -1,4 +1,5 @@
 const Transacao = require('../model/Transacao');
+const Animal = require('../model/Animal'); 
 
 // Função para buscar todas as transações
 const getAllTransacoes = async (req, res) => {
