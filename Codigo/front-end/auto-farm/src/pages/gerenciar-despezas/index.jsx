@@ -11,7 +11,7 @@ const PaginaPrincipal = () => {
 
     return (    
         <div className='min-h-screen bg-emerald-50 pb-10'>
-            <div className="flex flex-col md:flex-row mx-auto max-w-7xl pt-5 space-y-5 md:space-y-0 md:space-x-5">
+            <div className="flex flex-col md:flex-row mx-auto max-w-7xl pt-5 space-y-5 md:space-y-0 md:space-x-12">
                 {/* Container principal usando flex-grow para ocupar a maior parte da tela */}
                 <div className="flex flex-col w-full md:w-2/3 space-y-5">
                     {/* Componentes empilhados verticalmente */}
@@ -21,13 +21,13 @@ const PaginaPrincipal = () => {
                     <div className="flex space-x-4 mb-5">
                         <button 
                             onClick={() => setGraficoSelecionado('lucro')} 
-                            className={`px-4 py-2 rounded-lg ${graficoSelecionado === 'lucro' ? 'bg-emerald-800 text-white' : 'bg-gray-200'}`}
+                            className={`px-4 py-2 rounded-lg transition-colors duration-300 ${graficoSelecionado === 'lucro' ? 'bg-emerald-800 text-white' : 'bg-gray-200 hover:bg-neutral-300'}`}
                         >
                             Gráfico de Lucro
                         </button>
                         <button 
                             onClick={() => setGraficoSelecionado('despesas')} 
-                            className={`px-4 py-2 rounded-lg ${graficoSelecionado === 'despesas' ? 'bg-emerald-800 text-white' : 'bg-gray-200'}`}
+                            className={`px-4 py-2 rounded-lg transition-colors duration-300 ${graficoSelecionado === 'despesas' ? 'bg-emerald-800 text-white' : 'bg-gray-200 hover:bg-neutral-300'}`}
                         >
                             Gráfico de Despesas
                         </button>

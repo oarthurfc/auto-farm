@@ -84,7 +84,7 @@ const SideBar = ({ filtroMes, filtroAno }) => {
   }, [totalReceitas, totalDespesas, despesas]);
 
   return (
-    <div className="flex-grow p-4 pt-12">
+    <div className="flex-grow p-4 pt-16">
       {/* Card 1: Saldo em Contas */}
       <div className="border border-gray-300 rounded-lg shadow-lg p-4 mb-6 bg-white">
         <h3 className="text-lg font-semibold text-gray-800 mb-4">Saldo em Contas</h3>
@@ -104,7 +104,7 @@ const SideBar = ({ filtroMes, filtroAno }) => {
         {tiposMaioresDespesas.length > 0 ? (
           <ul>
             {tiposMaioresDespesas.map((despesa, index) => (
-              <li key={index} className="flex justify-between mb-2">
+              <li key={index} className="flex justify-between mb-7">
                 <span>{despesa.tipoDesepesa}</span>
                 <span className="text-red-600">R$ {despesa.total.toFixed(2)}</span>
               </li>
