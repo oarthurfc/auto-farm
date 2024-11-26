@@ -10,6 +10,7 @@ const cookieParser = require('cookie-parser');
 const { dbConnection } = require('./config/dbConnection');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
+const path = require('path');
 
 const PORT = process.env.PORT || 3500;
 
@@ -74,4 +75,11 @@ mongoose.connection.once('open', () => {
     app.listen(PORT, () => {
         console.log(`Server running on port ${PORT}`);
     });
+});
+
+
+//Production script
+app.use(express.static(path.join(__dirname, "../front-end/auto-farm/build")));
+app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "../front-end/auto-farm/build", "index.html"));
 });

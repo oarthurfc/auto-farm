@@ -21,7 +21,7 @@ const AnimalChart = () => {
     useEffect(() => {
         const token = Cookies.get('accessToken');  
 
-        axios.get('http://localhost:3500/animal/countByYear', {
+        axios.get('https://autofarm-app-service-plan-bscsakggbdb8hbek.westus-01.azurewebsites.net/animal/countByYear', {
             headers: {
                 Authorization: `Bearer ${token}`  // Adiciona o token nos headers
             }

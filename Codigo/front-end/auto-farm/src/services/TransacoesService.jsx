@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie'; // Não se esqueça de importar a biblioteca de cookies
 
-const BASE_URL = 'http://localhost:3500/transacao';
+const BASE_URL = 'https://autofarm-app-service-plan-bscsakggbdb8hbek.westus-01.azurewebsites.net/transacao';
 
 const api = axios.create({
     baseURL: BASE_URL,

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:3500';
+const BASE_URL = 'https://autofarm-app-service-plan-bscsakggbdb8hbek.westus-01.azurewebsites.net';
 
 export const login = async (email, password) => {
     const response = await axios.post(`${BASE_URL}/auth`, { email, password });

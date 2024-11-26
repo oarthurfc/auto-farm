@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-const BASE_URL = 'http://localhost:3500/tarefaFuncionario';
+const BASE_URL = 'https://autofarm-app-service-plan-bscsakggbdb8hbek.westus-01.azurewebsites.net/tarefaFuncionario';
 
 // Cria uma instância do Axios
 const api = axios.create({
