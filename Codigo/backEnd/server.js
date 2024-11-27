@@ -78,8 +78,8 @@ mongoose.connection.once('open', () => {
 });
 
 
-//Production script
-app.use(express.static(path.join(__dirname, "../front-end/auto-farm/build")));
+// Production script
+app.use(express.static(path.join(__dirname, "../front-end/auto-farm/dist")));   
 app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../front-end/auto-farm/build", "index.html"));
+    res.sendFile(path.resolve(__dirname, "../front-end/auto-farm/dist", "index.html")); 
 });
